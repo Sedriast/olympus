@@ -21,7 +21,7 @@ export default function App() {
   switch(op){
     case 0:
       return <View style={styles.container}>
-        <NoALongs setOP={setOP} setAN={setAN} setM2_={setM2}/>
+        <NoALongs setOP={setOP} setAN={setAN} setM2={setM2}/>
         <StatusBar style="auto" />
       </View>
     case 1:

@@ -6,12 +6,16 @@ import  SingleButton  from '../0_general/1_buttons/SingleButton';
 import ModalV from '../0_general/1_modal/ModalV';
 import SwitchV from '../0_general/1_switch/SwitchV';
 
-export default function NoALongs({setOP, setAN, setM2}){
+export default function NoALongs( props ){
+    //component props
+    const {setOP, setAN, setM2} = props;
+
     //******************************************************************************************************************* */
     //Events of inputs
-    const [ sectionTwo, setSecTwo ] = useState(false);
-    const [ sectionThree, setSecThree ] = useState(false);
-    const [enabledSwitch, setEnabled] = useState(false);
+    const [ sectionTwo,     setSecTwo ] =   useState(false);
+    const [ sectionThree,   setSecThree ] = useState(false);
+    const [enabledSwitch,   setEnabled ] =  useState(false);
+
     const toggleSwitch = () => setEnabled(previousState => !previousState);
 
     //control error events
@@ -34,27 +38,29 @@ export default function NoALongs({setOP, setAN, setM2}){
             if(sectionThree){
                 setSecThree(false);
             }
-            setM1(true);
+            setER1(true);
         }
     }
 
     function terrainArea(e){
-        if(e>0){
+        if(e>0.00001){
             setArea(e);
+            setSecThree(true);
         }else{
-            setArea("");
             setSecThree(false);
-            setM2(true);
+            setER2(true);
         }
     }
     
     function sendData(){
         if(farmArea>0&&cattle>0){
-            setM2(isEnabled?farmArea*6430:farmArea*10000)
+            let r = enabledSwitch?farmArea*6430:farmArea*10000;
+            console.log(r);
+            setM2(r);
             setAN(cattle);
             setOP(1);
         }else{
-            setM3(true);
+            setER3(true);
         }
     }
     //******************************************************************************************************************* */
@@ -72,26 +78,22 @@ export default function NoALongs({setOP, setAN, setM2}){
             </View>
 
             {/* *************************section two************************* */}
-
+            
             {sectionTwo?( 
             <View> 
                 <View>
                     <Inputs
                         placeholder={placeholders.p2} leyend={texts.t2}
                         type="numeric" keyType="numeric"
-                        value={farmArea}
-                        chText={e=>terrainArea(parseFloat(e).toFixed(2))}
+                        endEd={e=>terrainArea(parseFloat(e.nativeEvent.text))}
                     />
                 </View>
                 <SwitchV  textRigth="Fanegadas" setEnabled={toggleSwitch} enabled={enabledSwitch} textLeft="Hectáreas"/>
             </View>):<View></View>}
-
             {/* *************************section three************************* */}
-
             {sectionThree?(
-            <View>
-                <SingleButton press={sendData}/>
-            </View>):<View></View>}
+            <SingleButton press={sendData}/>
+            ):<View></View>}
 
             {/* *************************errors section************************* */}
 
