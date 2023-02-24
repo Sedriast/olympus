@@ -9,24 +9,19 @@ import SwitchV from '../0_general/1_switch/SwitchV';
 export default function NoALongs( props ){
     //component props
     const {setOP, setAN, setM2} = props;
-
     //******************************************************************************************************************* */
     //Events of inputs
     const [ sectionTwo,     setSecTwo ] =   useState(false);
     const [ sectionThree,   setSecThree ] = useState(false);
-    const [enabledSwitch,   setEnabled ] =  useState(false);
-
-    const toggleSwitch = () => setEnabled(previousState => !previousState);
-
+    const [ enabledSwitch,  setEnabled ] =  useState(false);
+    const toggleSwitch = () =>              setEnabled(previousState => !previousState);
     //control error events
-    const [er1, setER1] = useState(false);
-    const [er2, setER2] = useState(false);
-    const [er3, setER3] = useState(false);
-
+    const [er1, setER1] =                   useState(false);
+    const [er2, setER2] =                   useState(false);
+    const [er3, setER3] =                   useState(false);
     //Memory of shippable data
-    const [ cattle, setCattle ] = useState();
-    const [ farmArea, setArea ] = useState();
-
+    const [ cattle, setCattle ] =           useState();
+    const [ farmArea, setArea ] =           useState();
     //******************************************************************************************************************* */
     function bovineNumber(e){
         if(e>0 && e<100){
@@ -41,7 +36,6 @@ export default function NoALongs( props ){
             setER1(true);
         }
     }
-
     function terrainArea(e){
         if(e>0.00001){
             setArea(e);
@@ -51,11 +45,9 @@ export default function NoALongs( props ){
             setER2(true);
         }
     }
-    
     function sendData(){
         if(farmArea>0&&cattle>0){
             let r = enabledSwitch?farmArea*6430:farmArea*10000;
-            console.log(r);
             setM2(r);
             setAN(cattle);
             setOP(1);
@@ -66,8 +58,7 @@ export default function NoALongs( props ){
     //******************************************************************************************************************* */
     return( 
         <View>
-            {/* *************************section one************************* */}
-
+            {/* __________________________________________________________________SECTION ONE________________________ */}
             <View>
                 <Inputs
                     placeholder={placeholders.p1} leyend={texts.t1}
@@ -76,9 +67,7 @@ export default function NoALongs( props ){
                     chText={e=>bovineNumber(parseFloat(e).toFixed())}
                 />
             </View>
-
-            {/* *************************section two************************* */}
-            
+            {/* _________________________________________________________________SECTION TWO_________________________ */}
             {sectionTwo?( 
             <View> 
                 <View>
@@ -90,17 +79,14 @@ export default function NoALongs( props ){
                 </View>
                 <SwitchV  textRigth="Fanegadas" setEnabled={toggleSwitch} enabled={enabledSwitch} textLeft="Hectáreas"/>
             </View>):<View></View>}
-            {/* *************************section three************************* */}
+            {/* _______________________________________________________________SECTION THREE_________________________ */}
             {sectionThree?(
             <SingleButton press={sendData}/>
             ):<View></View>}
-
-            {/* *************************errors section************************* */}
-
+            {/* _______________________________________________________________ERRORS SECTION________________________ */}
             <ModalV msj={errors.e1} visi={er1} setVisi={setER1} />
             <ModalV msj={errors.e2} visi={er2} setVisi={setER2} />
             <ModalV msj={errors.e3} visi={er3} setVisi={setER3} />
-
         </View>
     );
 }
@@ -108,15 +94,12 @@ const texts = {
     t1: "El número de ejemplares bovinos es:",
     t2: "El área de la finca es:",
 }
-
 const placeholders = {
     p1: "Número de bovinos",
     p2: "Área de la finca",
 }
-
 const errors = {
     e1: "El número de ejemplares bovinos debe ser mayor a 0 y menor a 100",
     e2: "El área de la finca es incorrecta intente de nuevo ",
-    e3: "Ha ocurrido un error inesperado, por favor verifique los datos  ",
+    e3: "Ha ocurrido un error inesperado, por favor verifique los datos",
 }
-

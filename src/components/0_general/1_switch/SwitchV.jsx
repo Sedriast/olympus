@@ -22,7 +22,7 @@ export default function SwitchV( props ) {
 
 const st = StyleSheet.create({
     ley:{
-        flex: 0.45,
+        flex: 0,
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',

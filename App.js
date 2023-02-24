@@ -26,7 +26,7 @@ export default function App() {
       </View>
     case 1:
       return <View style={styles.container}>
-        <WeightProm setOP={setOP} setWA_={setWA} NA={an} />
+        <WeightProm setOP={setOP} setWA={setWA} NA={an} />
         <StatusBar style="auto" />
       </View>
     case 2:
@@ -35,6 +35,9 @@ export default function App() {
         <StatusBar style="auto" />
       </View>
     case 3:
+      console.log(op, an, m2, fv, pl, wa);
+
+      //******************************************** */
       let cvfva = (fv)*0.125; 
       let constotfv_dia = cvfva*wa;
       let unk = fv*m2;
