@@ -22,7 +22,7 @@ export default function PromForraje( props ){
     const [er3, setER3] =                       useState(false);
     const [er4, setER4] =                       useState(false);
     //Memory of shippable data
-    const [promsSamplesFV, setSample] =         useState(0);
+    const [ sumSamplesFV, setSample ] =         useState(0);
     //******************************************************************************************************************* */
     function numberSamples(e) {
         if(e>0 && e<11){
@@ -47,10 +47,11 @@ export default function PromForraje( props ){
         }
     }
     function sumSamples(e, fina){
-        if(e>10 && !fina===true){
-            setSample(promsSamplesFV+e);
-        }else if(fina===true){
-            setSample(promsSamplesFV+e);
+        console.log(e, fina);
+        if(e>0 && !fina){
+            setSample(sumSamplesFV+parseFloat(e));
+        }else if(fina){
+            setSample(sumSamplesFV+parseFloat(e));
             setSecThree(true);
         }else{
             setER2(true);
@@ -58,11 +59,11 @@ export default function PromForraje( props ){
         }
     }
     function sendData(){
-        if(val>0 && promsSamplesFV>0){
-            setFV(promsSamplesFV/iter.length);
+        if(sumSamplesFV>0){
+            setFV(sumSamplesFV/iter.length);
             setPL(enabledSwitch);
             setOP(3);
-        }else {
+        }else{
             setER4(true);
         }
     }
@@ -84,7 +85,7 @@ export default function PromForraje( props ){
             {/* _______________________________________________________________SECTION TWO________________________ */}
             {iter.map((t,i)=>{return(
             <Inputs 
-                key={i}
+                key={texts.t2 + (i+1)}
                 placeholder={placeholders.p2} leyend={texts.t2 + (i+1)}
                 type="numeric" keyType="numeric"
                 endEd={(e)=>{sumSamples(parseFloat(e.nativeEvent.text), t)}}
@@ -111,7 +112,7 @@ const texts = {
 }
 const placeholders = {
     p1: "Muestras",
-    p3: "Forraje verde/metro cuadrado",
+    p2: "Forraje/metro cuadrado",
 }
 const errors = {
     e1: "El número de muestras es incorrecto",

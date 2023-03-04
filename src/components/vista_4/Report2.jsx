@@ -10,7 +10,7 @@ export default function Report2({ diasTolerancia, numLotes, longLotes, franja, a
 }
 const st = StyleSheet.create({
     cont: {
-        flex: 1,
+        flex: 0.3,
         alignItems: 'center',
         justifyContent: 'center',
         

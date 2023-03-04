@@ -14,11 +14,11 @@ export default function NoALongs( props ){
     const [ sectionTwo,     setSecTwo ] =   useState(false);
     const [ sectionThree,   setSecThree ] = useState(false);
     const [ enabledSwitch,  setEnabled ] =  useState(false);
-    const toggleSwitch = () =>              setEnabled(previousState => !previousState);
+    const toggleSwitch = () =>              setEnabled( previousState => !previousState );
     //control error events
-    const [er1, setER1] =                   useState(false);
-    const [er2, setER2] =                   useState(false);
-    const [er3, setER3] =                   useState(false);
+    const [ er1, setER1 ] =                 useState(false);
+    const [ er2, setER2 ] =                 useState(false);
+    const [ er3, setER3 ] =                 useState(false);
     //Memory of shippable data
     const [ cattle, setCattle ] =           useState();
     const [ farmArea, setArea ] =           useState();
