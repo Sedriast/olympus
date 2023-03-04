@@ -1,13 +1,15 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, ImageBackground } from 'react-native';
 import { useState } from 'react';
 
 import ModalV from '../0_general/1_modal/ModalV';
 import SingleButton from '../0_general/1_buttons/SingleButton';
 import Inputs from '../0_general/1_input/Inputs';
 
+import backimg from '../../../assets/back.png';
+
 export default function WeightProm( props ){
     //component props
-    const { setOP, setWA, NA } =        props;
+    const { nav, setWA, NA } =        props;
     const refN =                        (NA>0 && NA<6)?parseInt(NA):1;
     const refT =                        (NA>0 && NA<6)?texts.tT1:texts.tT2;
     const iter =                        new Array(refN).fill(false, 0, refN-1);
@@ -35,14 +37,14 @@ export default function WeightProm( props ){
     function sendData(){
         if(refN>0 && promWeight>0){
             setWA(refN*((promWeight/refN)*0.125));
-            setOP(2);
+            nav.navigate("third");
         }else{
             setER2(true);
         }
     }
     //******************************************************************************************************************* */
     return (
-    <View>
+    <ImageBackground source={backimg} resizeMode="cover" style={st.container}>
         {/* _______________________________________________________________SECTION ONE________________________ */}
         <Text style={st.tx}>{refT}</Text>
         {iter.map((t, i)=>
@@ -61,7 +63,7 @@ export default function WeightProm( props ){
         {/* _______________________________________________________________ERRORS SECTION______________________ */}
         <ModalV msj={errors.e1} visi={er1} setVisi={setER1} />
         <ModalV msj={errors.e2} visi={er2} setVisi={setER2} />
-    </View>);
+    </ImageBackground>);
 }
 const texts = {
     t1: "Ejemplar ",
@@ -76,6 +78,13 @@ const errors = {
     e2: "Ha ocurrido un error inesperado, por favor verifique los datos  ",
 }
 const st = StyleSheet.create({
+    container: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        
+        backgroundColor: '#fff',
+    },
     btn:{
         width:250,
 		height: 100,

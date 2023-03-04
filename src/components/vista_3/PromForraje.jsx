@@ -1,14 +1,16 @@
 import { useState } from 'react';
-import { StyleSheet, Text, View, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, ImageBackground } from 'react-native';
 
 import Inputs from '../0_general/1_input/Inputs';
 import SingleButton from '../0_general/1_buttons/SingleButton';
 import ModalV from '../0_general/1_modal/ModalV';
 import SwitchV from '../0_general/1_switch/SwitchV';
 
+import backimg from '../../../assets/back.png';
+
 export default function PromForraje( props ){
     //component props
-    const { setOP, setFV, setPL } =             props;
+    const { nav, setFV, setPL } =             props;
     const [iter, setIter] =                     useState([]);
     //******************************************************************************************************************* */
     //Events of inputs
@@ -62,48 +64,50 @@ export default function PromForraje( props ){
         if(sumSamplesFV>0){
             setFV(sumSamplesFV/iter.length);
             setPL(enabledSwitch);
-            setOP(3);
+            nav.navigate("report");
         }else{
             setER4(true);
         }
     }
     //******************************************************************************************************************* */
     return  (
-    <View style={st.com}>
-        <ScrollView>
-            {/* _______________________________________________________________SECTION ONE________________________ */}
-            <Text style={st.tx1}>{texts.tT1}</Text>
-            <SwitchV  textRigth="No" setEnabled={toggleSwitch} enabled={enabledSwitch} textLeft="Si"/>
-            <View style={st.tir}>
-                <Inputs
-                    placeholder={placeholders.p1} leyend={texts.t1}
-                    type = "numeric" keyType="numeric"
-                    value={val}
-                    chText={(e)=>{numberSamples(parseFloat(e).toFixed())}}
-                />
+    <ImageBackground source={backimg} resizeMode="cover" style={st.container}>
+        <View style={st.com}>
+            <ScrollView>
+                {/* _______________________________________________________________SECTION ONE________________________ */}
+                <Text style={st.tx1}>{texts.tT1}</Text>
+                <SwitchV  textRigth="No" setEnabled={toggleSwitch} enabled={enabledSwitch} textLeft="Si"/>
+                <View style={st.tir}>
+                    <Inputs
+                        placeholder={placeholders.p1} leyend={texts.t1}
+                        type = "numeric" keyType="numeric"
+                        value={val}
+                        chText={(e)=>{numberSamples(parseFloat(e).toFixed())}}
+                    />
+                </View>
+                {/* _______________________________________________________________SECTION TWO________________________ */}
+                {iter.map((t,i)=>{return(
+                <Inputs 
+                    key={texts.t2 + (i+1)}
+                    placeholder={placeholders.p2} leyend={texts.t2 + (i+1)}
+                    type="numeric" keyType="numeric"
+                    endEd={(e)=>{sumSamples(parseFloat(e.nativeEvent.text), t)}}
+                />)}
+                )}
+            </ScrollView>
+            {/* _______________________________________________________________SECTION THREE________________________ */}
+            {sectionThree?(
+            <View style={st.btn}>
+                <SingleButton press={sendData}/>
             </View>
-            {/* _______________________________________________________________SECTION TWO________________________ */}
-            {iter.map((t,i)=>{return(
-            <Inputs 
-                key={texts.t2 + (i+1)}
-                placeholder={placeholders.p2} leyend={texts.t2 + (i+1)}
-                type="numeric" keyType="numeric"
-                endEd={(e)=>{sumSamples(parseFloat(e.nativeEvent.text), t)}}
-            />)}
-            )}
-        </ScrollView>
-        {/* _______________________________________________________________SECTION THREE________________________ */}
-        {sectionThree?(
-        <View style={st.btn}>
-            <SingleButton press={sendData}/>
+            ):<View></View>}
+            {/* _______________________________________________________________ERRORS SECTION______________________ */}
+            <ModalV msj={errors.e1} visi={er1} setVisi={setER1} />
+            <ModalV msj={errors.e2} visi={er2} setVisi={setER2} />
+            <ModalV msj={errors.e3} visi={er3} setVisi={setER3} />
+            <ModalV msj={errors.e4} visi={er4} setVisi={setER4} />
         </View>
-        ):<View></View>}
-        {/* _______________________________________________________________ERRORS SECTION______________________ */}
-        <ModalV msj={errors.e1} visi={er1} setVisi={setER1} />
-        <ModalV msj={errors.e2} visi={er2} setVisi={setER2} />
-        <ModalV msj={errors.e3} visi={er3} setVisi={setER3} />
-        <ModalV msj={errors.e4} visi={er4} setVisi={setER4} />
-    </View>);
+    </ImageBackground>);
 }
 const texts = {
     t1: "NÚMERO DE MUESTRAS FORRAJE VERDE",
@@ -121,6 +125,13 @@ const errors = {
     e4: "Ha ocurrido un error inesperado, por favor verifique los datos",
 }
 const st = StyleSheet.create({
+    container: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        
+        backgroundColor: '#fff',
+    },
     com:{
         flex:0.8,
     },

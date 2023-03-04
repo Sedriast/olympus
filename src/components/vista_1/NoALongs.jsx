@@ -1,14 +1,16 @@
-import { View} from 'react-native';
+import { View, StyleSheet, ImageBackground } from 'react-native';
 import { useState } from 'react';
 
-import  Inputs from '../0_general/1_input/Inputs'; 
-import  SingleButton  from '../0_general/1_buttons/SingleButton';
+import Inputs from '../0_general/1_input/Inputs'; 
+import SingleButton  from '../0_general/1_buttons/SingleButton';
 import ModalV from '../0_general/1_modal/ModalV';
 import SwitchV from '../0_general/1_switch/SwitchV';
 
+import backimg from '../../../assets/back.png';
+
 export default function NoALongs( props ){
     //component props
-    const {setOP, setAN, setM2} = props;
+    const { nav, setAN, setM2} = props;
     //******************************************************************************************************************* */
     //Events of inputs
     const [ sectionTwo,     setSecTwo ] =   useState(false);
@@ -50,14 +52,14 @@ export default function NoALongs( props ){
             let r = enabledSwitch?farmArea*6430:farmArea*10000;
             setM2(r);
             setAN(cattle);
-            setOP(1);
+            nav.navigate("second");
         }else{
             setER3(true);
         }
     }
     //******************************************************************************************************************* */
     return( 
-        <View>
+        <ImageBackground source={backimg} resizeMode="cover" style={st.container}>
             {/* __________________________________________________________________SECTION ONE________________________ */}
             <View>
                 <Inputs
@@ -87,7 +89,7 @@ export default function NoALongs( props ){
             <ModalV msj={errors.e1} visi={er1} setVisi={setER1} />
             <ModalV msj={errors.e2} visi={er2} setVisi={setER2} />
             <ModalV msj={errors.e3} visi={er3} setVisi={setER3} />
-        </View>
+        </ImageBackground>
     );
 }
 const texts = {
@@ -103,3 +105,12 @@ const errors = {
     e2: "El área de la finca es incorrecta intente de nuevo ",
     e3: "Ha ocurrido un error inesperado, por favor verifique los datos",
 }
+const st = StyleSheet.create({
+	container: {
+	  flex: 1,
+	  alignItems: 'center',
+	  justifyContent: 'center',
+	  
+	  backgroundColor: '#fff',
+	},
+});
