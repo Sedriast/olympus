@@ -4,8 +4,6 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { useState } from 'react';
 import { ImageBackground, StyleSheet, View } from 'react-native';
 
-import backimg from '../../assets/back.png';
-
 import NoALongs from "../components/vista_1/NoALongs";
 import WeightProm from "../components/vista_2/WeightProm";
 import PromForraje from "../components/vista_3/PromForraje";
@@ -14,35 +12,40 @@ import Report2 from "../components/vista_4/Report2";
 const Stack = createNativeStackNavigator();
 
 export default function NavigationStack(){
-	const [ numberCattle, setCattle ] =   useState(0);
-	const [ metros2, setMetros2 ] =       useState(0);
+	const [ numberCattle, setCattle ] =   useState(1);
+    const [ width_, setWidth ] =          useState(1);
+    const [ length_, setLength ] =        useState(1);
 
-	const [ forrajeVerde, setForraje ] =  useState(0);
-	const [ freeGrazing, setGrazing ] =   useState(0);
+	const [ forrajeVerde, setForraje ] =  useState(1);
+	const [ freeGrazing, setGrazing ] =   useState(1);
 
-	const [ animalWeight, setWeight ] =   useState(0);
+	const [ animalWeight, setWeight ] =   useState(1);
 
 	const report = () => {
-		console.log( numberCattle, metros2, forrajeVerde, freeGrazing, animalWeight);
+		//console.log( numberCattle, length_, width_, forrajeVerde, freeGrazing, animalWeight);
 
 		//******************************************** */
-		let cvfva = (forrajeVerde)*0.125; 
-		let constotfv_dia = cvfva*animalWeight;
-		let unk = forrajeVerde*metros2;
+		let cvfv_animal = animalWeight*0.125; 
+		let constotfv_dia = cvfv_animal*numberCattle;
+		let unk = forrajeVerde*(length_*width_);
 		let unk2 = unk*numberCattle;
 		let dias_carga = unk/constotfv_dia;
 
 		let m2_dia = constotfv_dia/forrajeVerde ;
-		let rela = metros2/Math.sqrt(m2_dia);
+		let rela = width_/Math.sqrt(m2_dia);
+
+		let longiF = Math.sqrt(m2_dia)/rela;
 
 		//******************************************** */
 		let dias_tolerancia = dias_carga-(dias_carga*0.2);
 
-		let longLotes = metros2/dias_carga;
-		let numLotes = metros2/longLotes;
+		let longLotes = length_/dias_tolerancia;
+		let numLotes = length_/longLotes;
 
-		let avance_dia = Math.sqrt(m2_dia)/rela;
+		let avance_dia = longiF;
 		
+		//console.log(cvfv_animal, constotfv_dia, unk, unk2, dias_carga, m2_dia, rela, dias_tolerancia, longLotes, numLotes, avance_dia);
+
 		return (
 			<Report2 
 				diasTolerancia={dias_tolerancia} 
@@ -53,12 +56,10 @@ export default function NavigationStack(){
 			/>
 		);
 	}
-
-
 	return (
 		<Stack.Navigator >
 				<Stack.Screen name="first" options={{ title: '', headerShown: false,}} >
-					{e=><NoALongs nav={e.navigation} setAN={setCattle} setM2={setMetros2}/>}
+					{e=><NoALongs nav={e.navigation} setAN={setCattle} setLength_={setLength} setWidth_={setWidth} />}
 				</Stack.Screen>
 				<Stack.Screen name="second" options={{ 
 					title: 'Pesos', 

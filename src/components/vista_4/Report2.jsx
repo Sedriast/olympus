@@ -8,8 +8,8 @@ export default function Report2({ diasTolerancia, numLotes, longLotes, franja, a
         <View style={st.cont}>
             <Text style={st.tx1}>El terreno puede llegar a soportar {diasTolerancia.toFixed()} días</Text>
             <Text style={st.tx1}>Se pueden llegar a  armar {numLotes.toFixed()} lotes de {longLotes} metros caudrados (M2)</Text>
-            {franja?<View></View>:<View><Text style={st.tx1}>Se debe mover la franja {parseFloat(avanceDia).toFixed(2)*100} metros, cada dia</Text>
-            <Text style={st.tx1}>Se debe mover la franja {parseFloat(m4h).toFixed(2)*100} metros, cada 4 horas </Text></View>}
+            {franja?<View></View>:<View><Text style={st.tx1}>Se debe mover la franja {parseFloat(avanceDia).toFixed(2)} metros, cada dia</Text>
+            <Text style={st.tx1}>Se debe mover la franja {parseFloat(m4h).toFixed(2)} metros, cada 4 horas </Text></View>}
         </View>
     </ImageBackground>)
 }

@@ -21,13 +21,13 @@ export default function WeightProm( props ){
     const [ er1, setER1 ] =             useState(false);
     const [ er2, setER2 ] =             useState(false);
     //Memory of shippable data
-    const [promWeight, setWeigth] =     useState(0);
+    const [summWeight, setWeigth] =     useState(0);
     //******************************************************************************************************************* */
     function sumWeight(e, fina){
         if(e>10 && !fina===true){
-            setWeigth(promWeight+e);
+            setWeigth(summWeight+e);
         }else if(fina===true){
-            setWeigth(promWeight+e);
+            setWeigth(summWeight+e);
             setSecTwo(true);
         }else{
             setER1(true);
@@ -35,8 +35,8 @@ export default function WeightProm( props ){
         }
     }
     function sendData(){
-        if(refN>0 && promWeight>0){
-            setWA(refN*((promWeight/refN)*0.125));
+        if(refN>0 && summWeight>0){
+            setWA(summWeight/refN);
             nav.navigate("third");
         }else{
             setER2(true);
@@ -56,7 +56,9 @@ export default function WeightProm( props ){
             />)}
         {/* _______________________________________________________________SECTION TWO_________________________ */}
         {sectionTwo?(
-        <View style={st.btn}>
+        <View>
+            <View style={st.sepa1}></View>
+            <View style={st.sepa2}></View>
             <SingleButton press={sendData}/>
         </View>
         ):<View></View>}
@@ -85,17 +87,20 @@ const st = StyleSheet.create({
         
         backgroundColor: '#fff',
     },
-    btn:{
-        width:250,
-		height: 100,
-        marginTop:40,
-        marginLeft:55,
-        borderRadius:100,
-    },
     tx:{
         textAlign: "center",
         fontSize: 35,
         marginLeft:10,
         marginBottom:40,
+    },
+    sepa1: {
+        height: 50,
+        borderBottomWidth: 2,
+        borderBottomColor:"#000",
+    },
+    sepa2: {
+        height: 50,
+        borderTopWidth: 2,
+        borderTopColor:"#000",
     },
 })

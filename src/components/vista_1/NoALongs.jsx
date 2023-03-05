@@ -10,20 +10,19 @@ import backimg from '../../../assets/back.png';
 
 export default function NoALongs( props ){
     //component props
-    const { nav, setAN, setM2} = props;
+    const { nav, setAN, setLength_, setWidth_ } = props;
     //******************************************************************************************************************* */
     //Events of inputs
     const [ sectionTwo,     setSecTwo ] =   useState(false);
     const [ sectionThree,   setSecThree ] = useState(false);
-    const [ enabledSwitch,  setEnabled ] =  useState(false);
-    const toggleSwitch = () =>              setEnabled( previousState => !previousState );
     //control error events
     const [ er1, setER1 ] =                 useState(false);
     const [ er2, setER2 ] =                 useState(false);
     const [ er3, setER3 ] =                 useState(false);
     //Memory of shippable data
     const [ cattle, setCattle ] =           useState();
-    const [ farmArea, setArea ] =           useState();
+    const [ width_, setWidth ] =            useState(1);
+    const [ length_, setLength ] =          useState(1);
     //******************************************************************************************************************* */
     function bovineNumber(e){
         if(e>0 && e<100){
@@ -38,9 +37,17 @@ export default function NoALongs( props ){
             setER1(true);
         }
     }
-    function terrainArea(e){
-        if(e>0.00001){
-            setArea(e);
+    function terrainArea1(e1){
+        if(e1>1){
+            setWidth(e1);
+        }else{
+            setSecThree(false);
+            setER2(true);
+        }
+    }
+    function terrainArea2(e2){
+        if(e2>1){
+            setLength(e2);
             setSecThree(true);
         }else{
             setSecThree(false);
@@ -48,9 +55,9 @@ export default function NoALongs( props ){
         }
     }
     function sendData(){
-        if(farmArea>0&&cattle>0){
-            let r = enabledSwitch?farmArea*6430:farmArea*10000;
-            setM2(r);
+        if((length_>0&&width_>0)&&cattle>0){
+            setLength_(length_ );
+            setWidth_(width_);
             setAN(cattle);
             nav.navigate("second");
         }else{
@@ -71,20 +78,32 @@ export default function NoALongs( props ){
             </View>
             {/* _________________________________________________________________SECTION TWO_________________________ */}
             {sectionTwo?( 
+               
             <View> 
+                <View style={st.sepa1}></View>
+                <View style={st.sepa2}></View>
                 <View>
                     <Inputs
                         placeholder={placeholders.p2} leyend={texts.t2}
                         type="numeric" keyType="numeric"
-                        endEd={e=>terrainArea(parseFloat(e.nativeEvent.text))}
+                        endEd={e=>terrainArea1(parseFloat(e.nativeEvent.text))}
                     />
                 </View>
-                <SwitchV  textRigth="Fanegadas" setEnabled={toggleSwitch} enabled={enabledSwitch} textLeft="Hectáreas"/>
+                <View>
+                    <Inputs
+                        placeholder={placeholders.p3} leyend={texts.t3}
+                        type="numeric" keyType="numeric"
+                        endEd={e=>terrainArea2(parseFloat(e.nativeEvent.text))}
+                    />
+                </View>
             </View>):<View></View>}
             {/* _______________________________________________________________SECTION THREE_________________________ */}
             {sectionThree?(
-            <SingleButton press={sendData}/>
-            ):<View></View>}
+            <View>
+                <View style={st.sepa1} />
+                <View style={st.sepa2} />
+                <SingleButton press={sendData}/>
+            </View>):<View></View>}
             {/* _______________________________________________________________ERRORS SECTION________________________ */}
             <ModalV msj={errors.e1} visi={er1} setVisi={setER1} />
             <ModalV msj={errors.e2} visi={er2} setVisi={setER2} />
@@ -94,15 +113,17 @@ export default function NoALongs( props ){
 }
 const texts = {
     t1: "El número de ejemplares bovinos es:",
-    t2: "El área de la finca es:",
+    t2: "El ancho de la finca en metros es:",
+    t3: "El largo de la finca en metros es:",
 }
 const placeholders = {
     p1: "Número de bovinos",
-    p2: "Área de la finca",
+    p2: "Ancho de la finca",
+    p3: "Largo de la finca",
 }
 const errors = {
     e1: "El número de ejemplares bovinos debe ser mayor a 0 y menor a 100",
-    e2: "El área de la finca es incorrecta intente de nuevo ",
+    e2: "El largo o el ancho de la finca es incorrecta intente de nuevo",
     e3: "Ha ocurrido un error inesperado, por favor verifique los datos",
 }
 const st = StyleSheet.create({
@@ -113,4 +134,14 @@ const st = StyleSheet.create({
 	  
 	  backgroundColor: '#fff',
 	},
+    sepa1: {
+        height: 50,
+        borderBottomWidth: 2,
+        borderBottomColor:"#000",
+    },
+    sepa2: {
+        height: 50,
+        borderTopWidth: 2,
+        borderTopColor:"#000",
+    },
 });

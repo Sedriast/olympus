@@ -97,7 +97,9 @@ export default function PromForraje( props ){
             </ScrollView>
             {/* _______________________________________________________________SECTION THREE________________________ */}
             {sectionThree?(
-            <View style={st.btn}>
+            <View>
+                <View style={st.sepa1}></View>
+                <View style={st.sepa2}></View>
                 <SingleButton press={sendData}/>
             </View>
             ):<View></View>}
@@ -138,13 +140,6 @@ const st = StyleSheet.create({
     tir:{
         marginBottom: 50,
     },
-    btn:{
-        width:250,
-		height: 100,
-        marginTop:40,
-        marginLeft:55,
-        borderRadius:100,
-    },
     tx1:{
         fontSize: 35,
         marginLeft:70,
@@ -155,5 +150,15 @@ const st = StyleSheet.create({
         marginTop:40,
         marginLeft:10,
         marginBottom:40,
+    },
+    sepa1: {
+        height: 50,
+        borderBottomWidth: 2,
+        borderBottomColor:"#000",
+    },
+    sepa2: {
+        height: 50,
+        borderTopWidth: 2,
+        borderTopColor:"#000",
     },
 })
