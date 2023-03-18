@@ -2,19 +2,17 @@ import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import { useState } from 'react';
-import { ImageBackground, StyleSheet, View } from 'react-native';
+import { StyleSheet } from 'react-native';
 
-import NoALongs from "../components/vista_1/NoALongs";
 import WeightProm from "../components/vista_2/WeightProm";
 import PromForraje from "../components/vista_3/PromForraje";
 import Report2 from "../components/vista_4/Report2";
+import AreaEP from "../components/vista_1/AreaEP";
 
 const Stack = createNativeStackNavigator();
 
 export default function NavigationStack(){
-	const [ numberCattle, setCattle ] =   useState(1);
-    const [ width_, setWidth ] =          useState(1);
-    const [ length_, setLength ] =        useState(1);
+    const [ area, setArea_ ] =        useState(1);
 
 	const [ forrajeVerde, setForraje ] =  useState(1);
 	const [ freeGrazing, setGrazing ] =   useState(1);
@@ -22,7 +20,7 @@ export default function NavigationStack(){
 	const [ animalWeight, setWeight ] =   useState(1);
 
 	const report = () => {
-		//console.log( numberCattle, length_, width_, forrajeVerde, freeGrazing, animalWeight);
+		console.log( numberCattle, length_, width_, forrajeVerde, freeGrazing, animalWeight);
 
 		//******************************************** */
 		let cvfv_animal = animalWeight*0.125; 
@@ -44,7 +42,7 @@ export default function NavigationStack(){
 
 		let avance_dia = longiF;
 		
-		//console.log(cvfv_animal, constotfv_dia, unk, unk2, dias_carga, m2_dia, rela, dias_tolerancia, longLotes, numLotes, avance_dia);
+		console.log(cvfv_animal, constotfv_dia, unk, unk2, dias_carga, m2_dia, rela, dias_tolerancia, longLotes, numLotes, avance_dia);
 
 		return (
 			<Report2 
@@ -59,7 +57,7 @@ export default function NavigationStack(){
 	return (
 		<Stack.Navigator >
 				<Stack.Screen name="first" options={{ title: '', headerShown: false,}} >
-					{e=><NoALongs nav={e.navigation} setAN={setCattle} setLength_={setLength} setWidth_={setWidth} />}
+					{e=><AreaEP nav={e.navigation} setArea_={setArea_} />}
 				</Stack.Screen>
 				<Stack.Screen name="second" options={{ 
 					title: 'Pesos', 
@@ -80,7 +78,7 @@ export default function NavigationStack(){
 					headerStyle: { backgroundColor: '#E2FFE2',},
 					headerShadowVisible: false,
 					}} >
-				{report}
+					{report}
 				</Stack.Screen>
 		</Stack.Navigator>
 	);

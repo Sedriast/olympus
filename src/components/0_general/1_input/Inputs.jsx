@@ -1,40 +1,41 @@
 import { View, Text, TextInput, StyleSheet } from "react-native";
 import { LinearGradient } from 'expo-linear-gradient';
 
-export default function Inputs({
-	placeholder,
-	leyend,
-	change,
-	endEd,
-	type,
-	keyType,
-	value,
-	blur_,
-	focus_,
-	chText,
-}) {
+export default function Inputs( props ) {
+	const {
+		placeholder,
+		leyend,
+		change,
+		endEd,
+		type,
+		keyType,
+		value,
+		blur_,
+		focus_,
+		chText,
+	} = props;
 	return (
-			<View style = { st.container }>
-				<Text style={st.ley}>{leyend}</Text>
-				<LinearGradient
-      				colors={[ 'transparent', 'white', 'white' ]}
-					style={st.gr}>
-					<TextInput
-						style={st.input}
-						autoComplete='off'
-						inputMode={type}
-						keyboardType={keyType}
-						placeholder={placeholder}
-						onChange={change}
-						onBlur={blur_}
-						onFocus={focus_}
-						onEndEditing={endEd}
-						onChangeText={chText}
-						value={value}
-						selectTextOnFocus={true}
-					/>
-				</LinearGradient>
-			</View>
+		<View style = { st.container }>
+			<Text style={st.ley}>{leyend}</Text>
+			<LinearGradient
+				colors={[ 'transparent', 'white', 'white' ]}
+				style={st.gr}>
+				<TextInput
+					style={st.input}
+					autoComplete='off'
+					inputMode={type}
+					keyboardType={keyType}
+					placeholder={placeholder}
+					onChange={change}
+					onBlur={blur_}
+					onFocus={focus_}
+					onEndEditing={endEd}
+					onChangeText={chText}
+					value={value}
+					selectTextOnFocus={true}
+				/>
+			</LinearGradient>
+		</View>
 	);
 }
 const st = StyleSheet.create({
@@ -45,7 +46,7 @@ const st = StyleSheet.create({
 	input:{
 		width: 350,
 		height: 40,
-		fontSize: 35,
+		fontSize: 30,
 		backgroundColor: "transparent",
 		borderBottomLeftRadius:10,
 		borderBottomRightRadius:10,
@@ -58,7 +59,7 @@ const st = StyleSheet.create({
 	ley:{
 		width: 350,
 		height: 40,
-		fontSize: 35,
+		fontSize: 20 ,
 	},
 	gr:{
 		borderBottomLeftRadius: 10,

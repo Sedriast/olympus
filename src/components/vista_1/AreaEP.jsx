@@ -1,33 +1,36 @@
-import { View, StyleSheet, ImageBackground } from 'react-native';
+import { View, StyleSheet, ImageBackground, Text, FlatList } from 'react-native';
 import { useState } from 'react';
 
-import Inputs from '../0_general/1_input/Inputs'; 
+import Inputs from '../0_general/1_input/Inputs';
 import SingleButton  from '../0_general/1_buttons/SingleButton';
 import ModalV from '../0_general/1_modal/ModalV';
-import SwitchV from '../0_general/1_switch/SwitchV';
 
-export default function NoALongs( props ){
+import backimg from '../../../assets/back.png';
+import Lists from '../0_general/1_flatList/Lists';
+
+export default function AreaEP( props ){
     //component props
-    const { nav, setAN, setLength_, setWidth_ } = props;
-    //***************************************************************************************** */
+    const { nav, setAN, setArea_ } = props;
+    //******************************************************************************************************************* */
     //Events of inputs
     const [ sectionTwo,     setSecTwo ] =   useState(false);
     const [ sectionThree,   setSecThree ] = useState(false);
+    const [ sectionFour,    setSecFour ] =  useState(false);
     //control error events
     const [ er1, setER1 ] =                 useState(false);
     const [ er2, setER2 ] =                 useState(false);
     const [ er3, setER3 ] =                 useState(false);
     //Memory of shippable data
-    const [ cattle, setCattle ] =           useState();
+    const [ areaEF, setArea ] =             useState(1);
     const [ width_, setWidth ] =            useState(1);
     const [ length_, setLength ] =          useState(1);
-    //***************************************************************************************** */
-    function bovineNumber(e){
-        if(e>0 && e<100){
-            setCattle(e); 
+    //******************************************************************************************************************* */
+    function terrainArea(e){
+        if(e>0){
+            setArea_(e);
             setSecTwo(true);
         }else{
-            setCattle("");
+            setArea_("");
             setSecTwo(false);
             if(sectionThree){
                 setSecThree(false);
@@ -53,70 +56,81 @@ export default function NoALongs( props ){
         }
     }
     function sendData(){
-        if((length_>0&&width_>0)&&cattle>0){
+        if((length_>0&&width_>0)&&areaEF>0){
             setLength_(length_ );
             setWidth_(width_);
-            setAN(cattle);
+            setAN(areaEF);
             nav.navigate("second");
         }else{
             setER3(true);
         }
     }
-    //***************************************************************************************** */
+    //******************************************************************************************************************* */
     return( 
         <ImageBackground source={backimg} resizeMode="cover" style={st.container}>
-            {/* ____________________________________________SECTION ONE________________________ */}
+            {/* _____________________________________SECTION ONE___________________________ */}
             <View>
                 <Inputs
                     placeholder={placeholders.p1} leyend={texts.t1}
                     type="numeric" keyType="numeric"
-                    value={cattle}
-                    chText={e=>bovineNumber(parseFloat(e).toFixed())}
+                    value={areaEF}
+                    chText={e=>terrainArea(parseFloat(e).toFixed(2))}
                 />
             </View>
-            {/* ____________________________________________SECTION TWO_________________________ */}
+            {/* _____________________________________SECTION TWO___________________________ */}
             {sectionTwo?(
-            <View> 
+            <View>
                 <View style={st.sepa1}></View>
                 <View style={st.sepa2}></View>
-                <View>
-                    <Inputs
-                        placeholder={placeholders.p2} leyend={texts.t2}
-                        type="numeric" keyType="numeric"
-                        endEd={e=>terrainArea1(parseFloat(e.nativeEvent.text))}
-                    />
-                </View>
-                <View>
-                    <Inputs
-                        placeholder={placeholders.p3} leyend={texts.t3}
-                        type="numeric" keyType="numeric"
-                        endEd={e=>terrainArea2(parseFloat(e.nativeEvent.text))}
-                    />
-                </View>
+                <Lists items={list}/>
             </View>):<View></View>}
-            {/* _______________________________________________________________SECTION THREE_________________________ */}
+            {/* _____________________________________SECTION THREE_________________________*/}
             {sectionThree?(
+            <View>
+                <View style={st.sepa1} />
+                <View style={st.sepa2} />
+                <Inputs
+                    placeholder={placeholders.p2} leyend={texts.t2}
+                    type="numeric" keyType="numeric"
+                    value={areaEF}
+                    chText={e=>bovineNumber(parseFloat(e).toFixed())}
+                />
+            </View>):<View></View>}
+            {/* _____________________________________SECTION FOUR_________________________ */}
+            {sectionFour?(
             <View>
                 <View style={st.sepa1} />
                 <View style={st.sepa2} />
                 <SingleButton press={sendData}/>
             </View>):<View></View>}
-            {/* _______________________________________________________________ERRORS SECTION________________________ */}
+            {/* _____________________________________ERRORS SECTION________________________ */}
             <ModalV msj={errors.e1} visi={er1} setVisi={setER1} />
             <ModalV msj={errors.e2} visi={er2} setVisi={setER2} />
             <ModalV msj={errors.e3} visi={er3} setVisi={setER3} />
         </ImageBackground>
     );
 }
+const list = [
+    {   key: "Kikuyo",
+        sleep: 35,
+    },
+    {   key: "Ryegrass",
+        sleep: 35,
+    },
+    {   key: "Carreton rojo",
+        sleep: 35,
+    },
+    {   key: "Carreton blanco",
+        sleep: 35,
+    },
+]
 const texts = {
-    t1: "El número de ejemplares bovinos es:",
-    t2: "El ancho de la finca en metros es:",
-    t3: "El largo de la finca en metros es:",
+    t1: "El Area efectiva de pastoreo, en Hectareas, es:",
+    t2: "Aforo (gr/m2)",
 }
 const placeholders = {
-    p1: "Número de bovinos",
-    p2: "Ancho de la finca",
-    p3: "Largo de la finca",
+    p1: "El Area efectiva de pastoreo",
+    p2: "gr/m2",
 }
 const errors = {
     e1: "El número de ejemplares bovinos debe ser mayor a 0 y menor a 100",

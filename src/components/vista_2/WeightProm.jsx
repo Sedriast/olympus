@@ -9,9 +9,8 @@ import backimg from '../../../assets/back.png';
 
 export default function WeightProm( props ){
     //component props
-    const { nav, setWA, NA } =        props;
+    const { nav, setWA, NA } =          props;
     const refN =                        (NA>0 && NA<6)?parseInt(NA):1;
-    const refT =                        (NA>0 && NA<6)?texts.tT1:texts.tT2;
     const iter =                        new Array(refN).fill(false, 0, refN-1);
     iter[refN-1] =                      true;
     //******************************************************************************************************************* */
@@ -46,14 +45,24 @@ export default function WeightProm( props ){
     return (
     <ImageBackground source={backimg} resizeMode="cover" style={st.container}>
         {/* _______________________________________________________________SECTION ONE________________________ */}
-        <Text style={st.tx}>{refT}</Text>
-        {iter.map((t, i)=>
-            <Inputs 
-                key={i}
-                placeholder={placeholders.p1} leyend={refN===1?"":texts.t1 + (i+1)}
-                type="numeric" keyType="numeric"
-                endEd={(e)=>{sumWeight(parseFloat(e.nativeEvent.text), t)}}
-            />)}
+        <Text style={st.tx}>{texts.tT1}</Text>
+        <Inputs 
+            key={i}
+            placeholder={placeholders.p1} leyend={texts.t1}
+            type="numeric" keyType="numeric"
+            endEd={(e)=>{sumWeight(parseFloat(e.nativeEvent.text), t)}}
+        />
+        {/* _______________________________________________________________SECTION TWO_________________________ */}
+        {sectionTwo?(
+            <View>
+                <View style={st.sepa1}></View>
+                <View style={st.sepa2}></View>
+                <FlatList
+                    data={list}
+                    renderItem={({item}) => <Text style={styles.item}>{item.key}</Text>}
+                />
+            </View>
+        ):<View></View>}
         {/* _______________________________________________________________SECTION TWO_________________________ */}
         {sectionTwo?(
         <View>
@@ -69,8 +78,7 @@ export default function WeightProm( props ){
 }
 const texts = {
     t1: "Ejemplar ",
-    tT1: "LOS PESOS, DE CADA EJEMPLAR, EN KG SON:",
-    tT2: "EL PESO PROMEDIO DE LOS EJEMPLARES, EN KG, ES:",
+    tT1: "EL PESO PROMEDIO DE LOS EJEMPLARES, EN KG, ES:",
 }
 const placeholders = {
     p1: "Peso en kilogramos",
