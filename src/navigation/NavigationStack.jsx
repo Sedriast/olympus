@@ -13,8 +13,8 @@ const Stack = createNativeStackNavigator();
 
 export default function NavigationStack(){
     const [ area, setArea_ ] =        useState(1);
+	const [ forraje, setForraje ] =        useState(1);
 
-	const [ forrajeVerde, setForraje ] =  useState(1);
 	const [ freeGrazing, setGrazing ] =   useState(1);
 
 	const [ animalWeight, setWeight ] =   useState(1);
@@ -57,7 +57,7 @@ export default function NavigationStack(){
 	return (
 		<Stack.Navigator >
 				<Stack.Screen name="first" options={{ title: '', headerShown: false,}} >
-					{e=><AreaEP nav={e.navigation} setArea_={setArea_} />}
+					{e=><AreaEP nav={e.navigation} setArea_={setArea_} setForraje_={setForraje} />}
 				</Stack.Screen>
 				<Stack.Screen name="second" options={{ 
 					title: 'Pesos', 
@@ -66,7 +66,7 @@ export default function NavigationStack(){
 					}} >
 					{e=><WeightProm nav={e.navigation} setWA={setWeight} NA={numberCattle} />}
 				</Stack.Screen>
-				<Stack.Screen name="third" options={{ 
+				<Stack.Screen name="third" options={{
 					title: 'Muestreo',
 					headerStyle: { backgroundColor: '#E2FFE2',},
 					headerShadowVisible: false,
@@ -83,7 +83,7 @@ export default function NavigationStack(){
 		</Stack.Navigator>
 	);
 }
-const styles = StyleSheet.create({
+const st = StyleSheet.create({
 	container: {
 	  flex: 1,
 	  alignItems: 'center',
