@@ -35,11 +35,12 @@ export default function AreaEP( props ){
 	]
 	//Events lists
 	const [ openList, setOpen ] =           						useState(false);
-	const [ leyend, setLeyend ] = 									useState(list[0].key);
+	const [ leyend, setLeyend ] = 									useState("Tipo de forraje");
 	//control error events
 	const [ er1, setER1 ] =                 						useState(false);
 	const [ er2, setER2 ] =                 						useState(false);
 	const [ er3, setER3 ] =                 						useState(false);
+	const [ er4, setER4 ] =                 						useState(false);
 	//Memory of shippable data
 	const [ areaEF, setAreaEF ] =             						useState(1);
 	const [ forrageVariety, setFV_ ] =         						useState(1);
@@ -51,7 +52,7 @@ export default function AreaEP( props ){
 			setAreaEF(e);
 			setSecTwo(true);
 		}else{
-			setArea("");
+			setAreaEF("");
 			setSecTwo(false);
 			if(sectionThree){
 				setSecThree(false);
@@ -76,8 +77,9 @@ export default function AreaEP( props ){
 			setAforo(e);
 			setSecFour(true);
 		}else{
+			setAforo(1);
 			setSecFour(false);
-			setER2(true);
+			setER3(true);
 		}
 	}
 	function sendData(){
@@ -89,7 +91,7 @@ export default function AreaEP( props ){
 
 			nav.navigate("second");
 		}else{
-			setER3(true);
+			setER4(true);
 		}
 	}
 	//******************************************************************************************************************* */
@@ -138,7 +140,6 @@ export default function AreaEP( props ){
 				<Inputs
 					placeholder={placeholders.p2} leyend={texts.t2}
 					type="numeric" keyType="numeric"
-					value={aforo}
 					chText={e=>aforoFunc(parseFloat(e).toFixed())}
 				/>
 			</View>):<View></View>}
@@ -153,6 +154,7 @@ export default function AreaEP( props ){
 			<ModalV msj={errors.e1} visi={er1} setVisi={setER1} />
 			<ModalV msj={errors.e2} visi={er2} setVisi={setER2} />
 			<ModalV msj={errors.e3} visi={er3} setVisi={setER3} />
+			<ModalV msj={errors.e4} visi={er4} setVisi={setER4} />
 		</ImageBackground>
 	);
 }
@@ -165,9 +167,10 @@ const placeholders = {
 	p2: "gr/m2",
 }
 const errors = {
-	e1: "El número de ejemplares bovinos debe ser mayor a 0 y menor a 100",
-	e2: "El largo o el ancho de la finca es incorrecta intente de nuevo",
-	e3: "Ha ocurrido un error inesperado, por favor verifique los datos",
+	e1: "El area no puede estar vacia, porfavor reintente",
+	e2: "A ocurrido un error inesperado en referente al tipo de forraje seleccionado",
+	e3: "El aforo no puede estar vacio, porfavor reintente",
+	e4: "A ocurrido un error inesperado, porfavor reintente",
 }
 const st = StyleSheet.create({
 	container: {

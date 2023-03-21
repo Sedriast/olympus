@@ -11,15 +11,15 @@ export default function Report2( props ){
         animalCharge,
         realCharge,} = props
     
-        return  (
+    return (
     <ImageBackground source={backimg} resizeMode="cover" style={st.container}>
         <View style={st.cont}>
-           <Text>Cantidad de potreros:              {paddockLog}</Text>
-           <Text>Área de los potreros:              {areaPaddock}</Text>
-           <Text>Oferta Forrajera por potrero:      {forragePaddock}</Text>
-           <Text>Oferta Forrajera real por potrero: {realForragePaddock}</Text>
-           <Text>Carga Animal:                      {animalCharge}</Text>
-           <Text>Carga Real:                        {realCharge}</Text>
+           <Text>Cantidad de potreros:              {parseFloat(paddockLog).toFixed()}</Text>
+           <Text>Área de los potreros:              {parseFloat(areaPaddock).toFixed()}</Text>
+           <Text>Oferta Forrajera por potrero:      {parseFloat(forragePaddock).toFixed()}</Text>
+           <Text>Oferta Forrajera real por potrero: {parseFloat(realForragePaddock).toFixed()}</Text>
+           <Text>Carga Animal:                      {parseFloat(animalCharge).toFixed()}</Text>
+           <Text>Carga Real:                        {parseFloat(realCharge).toFixed()}</Text>
         </View>
     </ImageBackground>)
 }
@@ -33,8 +33,14 @@ const st = StyleSheet.create({
     },
     cont: {
         flex: 0.3,
-        alignItems: 'center',
-        justifyContent: 'center',
+
+        alignItems: "flex-end",
+        justifyContent: "center",
+
+        paddingLeft: 20,
+        paddingRight: 20,
+
+        borderRadius: 20,
         
         backgroundColor: '#36FF8A',
     },

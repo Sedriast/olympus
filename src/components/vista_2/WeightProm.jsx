@@ -65,21 +65,22 @@ export default function WeightProm( props ){
 		}
 	}
 	function forrageConsumFunc( e ){
-		if( e>1 ){
+		if(e>0){
 			setFC_( e );
 			setSecFour(true);
 		}else{
-			setER1(true);
+			setER2(true);
 			setSecFour(false);
 		}
+
 	}
 	function sendData(){
-		if(pWeight > 0 && consumoForraje > 0 && periodoOC > 0){
+		if(pWeight > 0 && forrageConsum > 0 && occupationPeriot > 0){
 			weigth_(pWeight);
 			forrageConsum_(forrageConsum);
 			occupationPeriot_(occupationPeriot);
 
-			nav.navigate("third");
+			nav.navigate("report");
 		}else{
 			setER2(true);
 		}
@@ -99,6 +100,8 @@ export default function WeightProm( props ){
 		{/* _______________________________________________________________SECTION TWO_________________________ */}
 		{sectionTwo?(
 			<View>
+				<View style={st.sepa1}></View>
+				<View style={st.sepa2}></View>
 				<Text style={st.tx}>{texts.tT2}</Text>
 				<Inputs 
 					placeholder={placeholders.p2} leyend={texts.t2}
@@ -140,7 +143,7 @@ export default function WeightProm( props ){
 			<View>
 				<View style={ st.sepa1 }></View>
 				<View style={ st.sepa2 }></View>
-				<SingleButton press={ sendData }/>
+				<SingleButton tile="Siguiente" press={ sendData }/>
 			</View>
 		):<View></View>}
 		{/* _______________________________________________________________ERRORS SECTION______________________ */}
@@ -149,7 +152,7 @@ export default function WeightProm( props ){
 	</ImageBackground>);
 }
 const texts = {
-	t1: "Ejemplar ",
+	t1: " ",
 	t2: "Periodo de ocupación",
 	tT1: "EL PESO PROMEDIO DE LOS EJEMPLARES, EN KG, ES:",
 	tT2: "EL PERIODO DE OCUPACIÓN EN DIAS ES:",
@@ -172,7 +175,7 @@ const st = StyleSheet.create({
 	},
 	tx:{
 		textAlign: "center",
-		fontSize: 35,
+		fontSize: 25,
 		marginLeft:10,
 		marginBottom:40,
 	},
