@@ -5,73 +5,61 @@ import { useState } from 'react';
 import { StyleSheet } from 'react-native';
 
 import WeightProm from "../components/vista_2/WeightProm";
-import PromForraje from "../components/vista_3/PromForraje";
-import Report2 from "../components/vista_4/Report2";
+import Report2 from "../components/vista_3/Report2";
 import AreaEP from "../components/vista_1/AreaEP";
 
 const Stack = createNativeStackNavigator();
 
 export default function NavigationStack(){
-    const [ area, setArea_ ] =        useState(1);
-	const [ forraje, setForraje ] =        useState(1);
-
-	const [ freeGrazing, setGrazing ] =   useState(1);
-
-	const [ animalWeight, setWeight ] =   useState(1);
+	//State variables
+    const [ areaEP, setAreaEP_ ] =        	useState(1);
+	const [ forrageVariety, setFV_ ] =     	useState(1);
+	const [ aforo, setAforo_ ] =   			useState(1);
+	const [ animalWeight, setWeight_ ] =   	useState(1);
+	const [ forrageConsum, setFC_ ] =		useState(1);
+	const [ occupationPeriot, setOP_ ] =	useState(1);
+	const [ forrageRest, setFR_ ] = 		useState(1);
+	
+	//Constants
+	const perdidaPastoreo = 				0.2;
+	const grazingDays = 					forrageRest + occupationPeriot;
+	const UGG = 							450;
 
 	const report = () => {
-		console.log( numberCattle, length_, width_, forrajeVerde, freeGrazing, animalWeight);
+		//******************************************************************************************* */
+		let NoPaddocks = 					parseFloat((forrageRest / forrageConsum) +1).toFixed();
+		let areaPaddocks =					(areaEP*10000)/parseFloat(NoPaddocks).toFixed();
+		let forragePaddock = 				(areaPaddocks*aforo)/1000;
+		let realForragePaddock = 			forragePaddock-(forragePaddock*perdidaPastoreo);
+		let animalCharge = 					parseFloat(realForragePaddock / (occupationPeriot * (animalWeight * forrageConsum))).toFixed();
+		let realCharge =					parseFloat((animalCharge * animalWeight) / UGG).toFixed();
 
-		//******************************************** */
-		let cvfv_animal = animalWeight*0.125; 
-		let constotfv_dia = cvfv_animal*numberCattle;
-		let unk = forrajeVerde*(length_*width_);
-		let unk2 = unk*numberCattle;
-		let dias_carga = unk/constotfv_dia;
-
-		let m2_dia = constotfv_dia/forrajeVerde ;
-		let rela = width_/Math.sqrt(m2_dia);
-
-		let longiF = Math.sqrt(m2_dia)/rela;
-
-		//******************************************** */
-		let dias_tolerancia = dias_carga-(dias_carga*0.2);
-
-		let longLotes = length_/dias_tolerancia;
-		let numLotes = length_/longLotes;
-
-		let avance_dia = longiF;
-		
-		console.log(cvfv_animal, constotfv_dia, unk, unk2, dias_carga, m2_dia, rela, dias_tolerancia, longLotes, numLotes, avance_dia);
+		let unk_1 = 						realCharge * animalWeight * forrageConsum;
+		let unk_2 = 						realForragePaddock / unk_1;
+		let unk_3 = 						Math.sqrt(areaPaddocks);
 
 		return (
 			<Report2 
-				diasTolerancia={dias_tolerancia} 
-				numLotes={numLotes} 
-				longLotes={longLotes.toFixed(2)}
-				avanceDia={avance_dia.toFixed(2)}
-				m4h={avance_dia.toFixed(2)/3}
+				paddockLog =				{NoPaddocks}
+				areaPaddock =				{areaPaddocks}
+				forragePaddock =			{forragePaddock}
+				realForragePaddock =		{realForragePaddock}
+				animalCharge =				{animalCharge}
+				realCharge =				{realCharge}
 			/>
 		);
 	}
 	return (
 		<Stack.Navigator >
 				<Stack.Screen name="first" options={{ title: '', headerShown: false,}} >
-					{e=><AreaEP nav={e.navigation} setArea_={setArea_} setForraje_={setForraje} />}
+					{e=><AreaEP nav={e.navigation} area_={setAreaEP_} forrageVariety_={setFV_} forrageRest_={setFR_} aforo_={setAforo_} />}
 				</Stack.Screen>
 				<Stack.Screen name="second" options={{ 
-					title: 'Pesos', 
+					title: 'Pesos, forraje y ocupación', 
 					headerStyle: {backgroundColor: '#E2FFE2',},
 					headerShadowVisible: false, 
 					}} >
-					{e=><WeightProm nav={e.navigation} setWA={setWeight} NA={numberCattle} />}
-				</Stack.Screen>
-				<Stack.Screen name="third" options={{
-					title: 'Muestreo',
-					headerStyle: { backgroundColor: '#E2FFE2',},
-					headerShadowVisible: false,
-					}} >
-					{e=><PromForraje nav={e.navigation} setFV={setForraje} setPL={setGrazing}/>}
+					{e=><WeightProm nav={e.navigation} weigth_={setWeight_} forrageConsum_={setFC_} occupationPeriot_={setOP_}/>}
 				</Stack.Screen>
 				<Stack.Screen name="report" options={{ 
 					title: 'Reporte', 

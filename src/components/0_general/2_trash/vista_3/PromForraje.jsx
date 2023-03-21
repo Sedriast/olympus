@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { StyleSheet, Text, View, ScrollView, ImageBackground } from 'react-native';
 
-import Inputs from '../0_general/1_input/Inputs';
-import SingleButton from '../0_general/1_buttons/SingleButton';
-import ModalV from '../0_general/1_modal/ModalV';
-import SwitchV from '../0_general/1_switch/SwitchV';
+import Inputs from '../../1_input/Inputs';
+import SingleButton from '../../1_buttons/SingleButton';
+import ModalV from '../../1_modal/ModalV';
+import SwitchV from '../../1_switch/SwitchV';
 
 import backimg from '../../../assets/back.png';
 

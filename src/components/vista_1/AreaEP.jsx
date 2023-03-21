@@ -9,12 +9,12 @@ import backimg from '../../../assets/back.png';
 
 export default function AreaEP( props ){
 	//component props
-	const { nav, setForraje_, setArea_ } = props;
+	const { nav, area_, forrageVariety_, forrageRest_, aforo_ } = 	props;
 	//******************************************************************************************************************* */
 	//Events inputs
-	const [ sectionTwo,     setSecTwo ] =   useState(false);
-	const [ sectionThree,   setSecThree ] = useState(false);
-	const [ sectionFour,    setSecFour ] =  useState(false);
+	const [ sectionTwo,     setSecTwo ] =   						useState(false);
+	const [ sectionThree,   setSecThree ] = 						useState(false);
+	const [ sectionFour,    setSecFour ] =  						useState(false);
 	const list = [
 		{   
 			key: "Kikuyo",
@@ -34,19 +34,21 @@ export default function AreaEP( props ){
 		},
 	]
 	//Events lists
-	const [ openList, setOpen ] =           useState(false);
-	const [ leyend, setLeyend ] = 					useState(list[0].key);
+	const [ openList, setOpen ] =           						useState(false);
+	const [ leyend, setLeyend ] = 									useState(list[0].key);
 	//control error events
-	const [ er1, setER1 ] =                 useState(false);
-	const [ er2, setER2 ] =                 useState(false);
-	const [ er3, setER3 ] =                 useState(false);
+	const [ er1, setER1 ] =                 						useState(false);
+	const [ er2, setER2 ] =                 						useState(false);
+	const [ er3, setER3 ] =                 						useState(false);
 	//Memory of shippable data
-	const [ areaEF, setArea ] =             useState(1);
-	const [ width_, setWidth ] =            useState(1);
+	const [ areaEF, setAreaEF ] =             						useState(1);
+	const [ forrageVariety, setFV_ ] =         						useState(1);
+	const [ forrageRest, setFR_ ] =         						useState(1);
+	const [ aforo, setAforo ] =         							useState(1);
 	//******************************************************************************************************************* */
 	function terrainArea(e){
 		if(e>0){
-			setArea(e);
+			setAreaEF(e);
 			setSecTwo(true);
 		}else{
 			setArea("");
@@ -58,19 +60,33 @@ export default function AreaEP( props ){
 			setER1(true);
 		}
 	}
-	function forraje(sleep){
-		if(sleep>1){
-			setWidth(sleep);
+	function forrageFunc( rest, name ){
+		if(rest > 1 && name != ""){
+			setFV_(rest);
+			setFR_(name);
+			setSecThree(true);
 		}else{
 			setSecThree(false);
 			setSecFour(false);
 			setER2(true);
 		}
 	}
+	function aforoFunc( e ){
+		if( e > 0 ){
+			setAforo(e);
+			setSecFour(true);
+		}else{
+			setSecFour(false);
+			setER2(true);
+		}
+	}
 	function sendData(){
-		if((length_>0&&width_>0)&&areaEF>0){
-			setArea_(areaEF);
-			setAN(areaEF);
+		if(areaEF > 0 && aforo > 0){
+			area_(areaEF);
+			forrageVariety_(forrageVariety);
+			forrageRest_(forrageRest);
+			aforo_(aforo);
+
 			nav.navigate("second");
 		}else{
 			setER3(true);
@@ -94,21 +110,26 @@ export default function AreaEP( props ){
 				<View style={st.sepa1} />
 				<View style={st.sepa2} />
 				<View>
-					<View style={st.e}><SingleButton tile={leyend} press={()=>setOpen(!openList)} /></View>
-					{openList?(<View style={st.r}>
-						{list.map((e,i)=>{
-						return (
-						<SingleButton 
-							key =   {i}
-							tile =  {e.key}
-							press = {()=>{forraje(e.sleep);
-										setLeyend(e.key);
-										setOpen(!openList);}}>
-									{e.key}
-						</SingleButton>)})}
-					</View>):(<View></View>)}
-				</View>
-			</View>):<View></View>}
+					<View style={st.e}>
+						<SingleButton tile={leyend} press={()=>setOpen(!openList)} /></View>
+						{openList?(
+						<View style={st.r}>
+							{list.map((e,i)=>{
+							return (
+								<View key = {i} style = {st.d}>
+									<SingleButton 
+										tile =  {e.key}
+										press = {()=>{
+													forrageFunc(e.sleep, e.key);
+													setLeyend(e.key);
+													setOpen(!openList);}}>
+												{e.key}
+									</SingleButton>
+								</View>
+							)})}
+						</View>):(<View></View>)}
+					</View>
+				</View>):<View></View>}
 			{/* _____________________________________SECTION THREE_________________________*/}
 			{sectionThree?(
 			<View>
@@ -117,8 +138,8 @@ export default function AreaEP( props ){
 				<Inputs
 					placeholder={placeholders.p2} leyend={texts.t2}
 					type="numeric" keyType="numeric"
-					value={areaEF}
-					chText={e=>bovineNumber(parseFloat(e).toFixed())}
+					value={aforo}
+					chText={e=>aforoFunc(parseFloat(e).toFixed())}
 				/>
 			</View>):<View></View>}
 			{/* _____________________________________SECTION FOUR_________________________ */}
@@ -126,7 +147,7 @@ export default function AreaEP( props ){
 			<View>
 				<View style={st.sepa1} />
 				<View style={st.sepa2} />
-				<SingleButton press={sendData}/>
+				<SingleButton tile="Siguiente" press={sendData}/>
 			</View>):<View></View>}
 			{/* _____________________________________ERRORS SECTION________________________ */}
 			<ModalV msj={errors.e1} visi={er1} setVisi={setER1} />
@@ -173,5 +194,9 @@ const st = StyleSheet.create({
 	e:{
 		width: 350,
 		marginBottom: 10,
+	},
+	d:{
+		width: 350,
+		marginBottom: 2,
 	},
 });
