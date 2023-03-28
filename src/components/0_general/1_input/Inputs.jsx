@@ -15,8 +15,8 @@ export default function Inputs( props ) {
 		chText,
 	} = props;
 	return (
-		<View style = { st.container }>
-			<Text style={st.ley}>{leyend}</Text>
+		<View style={ st.container }>
+			<Text style={ st.ley }>{ leyend }</Text>
 			<LinearGradient
 				colors={[ 'transparent', 'white', 'white' ]}
 				style={st.gr}>

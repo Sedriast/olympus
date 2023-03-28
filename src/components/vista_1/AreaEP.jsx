@@ -1,16 +1,22 @@
-import { View, StyleSheet, ImageBackground } from 'react-native';
+import { View, StyleSheet, ImageBackground, Text } from 'react-native';
 import { useState } from 'react';
 
 import Inputs from '../0_general/1_input/Inputs';
-import SingleButton  from '../0_general/1_buttons/SingleButton';
 import ModalV from '../0_general/1_modal/ModalV';
 
 import backimg from '../../../assets/back.png';
+import SingleButton from '../0_general/1_buttons/SingleButton';
+import DropDownList from '../0_general/1_dropDownList/DropDownList';
+import { LinearGradient } from 'expo-linear-gradient';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 export default function AreaEP( props ){
 	//component props
 	const { nav, area_, forrageVariety_, forrageRest_, aforo_ } = 	props;
 	//******************************************************************************************************************* */
+	//Event list
+	const [ openList, setOpen ] =           						useState(false);
+	const [ leyend, setLeyend ] = 											useState("Tipo de hierba");
 	//Events inputs
 	const [ sectionTwo,     setSecTwo ] =   						useState(false);
 	const [ sectionThree,   setSecThree ] = 						useState(false);
@@ -33,26 +39,23 @@ export default function AreaEP( props ){
 			sleep: 35,
 		},
 	]
-	//Events lists
-	const [ openList, setOpen ] =           						useState(false);
-	const [ leyend, setLeyend ] = 									useState("Tipo de forraje");
 	//control error events
 	const [ er1, setER1 ] =                 						useState(false);
 	const [ er2, setER2 ] =                 						useState(false);
 	const [ er3, setER3 ] =                 						useState(false);
 	const [ er4, setER4 ] =                 						useState(false);
 	//Memory of shippable data
-	const [ areaEF, setAreaEF ] =             						useState(1);
-	const [ forrageVariety, setFV_ ] =         						useState(1);
+	const [ areaEF, setAreaEF ] =             					useState(0.1);
+	const [ forrageVariety, setFV_ ] =         					useState(1);
 	const [ forrageRest, setFR_ ] =         						useState(1);
-	const [ aforo, setAforo ] =         							useState(1);
+	const [ aforo, setAforo ] =         								useState(1);
 	//******************************************************************************************************************* */
 	function terrainArea(e){
-		if(e>0){
+		if(e > -0.1){
 			setAreaEF(e);
 			setSecTwo(true);
 		}else{
-			setAreaEF("");
+			setAreaEF(0.1);
 			setSecTwo(false);
 			if(sectionThree){
 				setSecThree(false);
@@ -100,61 +103,56 @@ export default function AreaEP( props ){
 			{/* _____________________________________SECTION ONE___________________________ */}
 			<View>
 				<Inputs
-					placeholder={placeholders.p1} leyend={texts.t1}
+					placeholder={ placeholders.p1 } leyend={ texts.t1 }
 					type="numeric" keyType="numeric"
-					value={areaEF}
-					chText={e=>terrainArea(parseFloat(e).toFixed())}
+					endEd={e=>terrainArea(parseFloat(e.nativeEvent.text))}
 				/>
 			</View>
 			{/* _____________________________________SECTION TWO___________________________ */}
 			{sectionTwo?(
 			<View>
-				<View style={st.sepa1} />
-				<View style={st.sepa2} />
+				<View style={ st.sepa1 } />
+				<View style={ st.sepa2 } />
+				<LinearGradient colors={[ 'transparent', '#7FA4A2', '#7FA4A2' ]} style={ st.port }>
+					<TouchableOpacity onPress={ ()=>{setOpen( !openList )} }>
+						<Text style={ st.layer }>{ leyend }</Text>
+					</TouchableOpacity>
+				</LinearGradient>
 				<View>
-					<View style={st.e}>
-						<SingleButton tile={leyend} press={()=>setOpen(!openList)} /></View>
-						{openList?(
-						<View style={st.r}>
-							{list.map((e,i)=>{
-							return (
-								<View key = {i} style = {st.d}>
-									<SingleButton 
-										tile =  {e.key}
-										press = {()=>{
-													forrageFunc(e.sleep, e.key);
-													setLeyend(e.key);
-													setOpen(!openList);}}>
-												{e.key}
-									</SingleButton>
-								</View>
-							)})}
-						</View>):(<View></View>)}
-					</View>
-				</View>):<View></View>}
+					{openList?(
+					<View style={ st.r }>
+					{list.map(( e,i )=>{
+					return (
+						<TouchableOpacity key={ i } style={ st.btn } onPress={ console.log( "sdfa" ) }>
+							<Text style={ st.layer }>{ e.key }</Text>
+						</TouchableOpacity>
+					)})}
+					</View>):(<View></View>)}
+				</View>
+			</View>):<View></View>}
 			{/* _____________________________________SECTION THREE_________________________*/}
 			{sectionThree?(
 			<View>
-				<View style={st.sepa1} />
-				<View style={st.sepa2} />
+				<View style={ st.sepa1 } />
+				<View style={ st.sepa2 } />
 				<Inputs
-					placeholder={placeholders.p2} leyend={texts.t2}
+					placeholder={ placeholders.p2 } leyend={ texts.t2 }
 					type="numeric" keyType="numeric"
-					chText={e=>aforoFunc(parseFloat(e).toFixed())}
+					chText={ e=>aforoFunc(parseFloat(e).toFixed()) }
 				/>
 			</View>):<View></View>}
 			{/* _____________________________________SECTION FOUR_________________________ */}
 			{sectionFour?(
 			<View>
-				<View style={st.sepa1} />
-				<View style={st.sepa2} />
-				<SingleButton tile="Siguiente" press={sendData}/>
+				<View style={ st.sepa1 } />
+				<View style={ st.sepa2 } />
+				<SingleButton tile="Siguiente" press={ sendData }/>
 			</View>):<View></View>}
 			{/* _____________________________________ERRORS SECTION________________________ */}
-			<ModalV msj={errors.e1} visi={er1} setVisi={setER1} />
-			<ModalV msj={errors.e2} visi={er2} setVisi={setER2} />
-			<ModalV msj={errors.e3} visi={er3} setVisi={setER3} />
-			<ModalV msj={errors.e4} visi={er4} setVisi={setER4} />
+			<ModalV msj={ errors.e1 } visi={ er1 } setVisi={ setER1 } />
+			<ModalV msj={ errors.e2 } visi={ er2 } setVisi={ setER2 } />
+			<ModalV msj={ errors.e3 } visi={ er3 } setVisi={ setER3 } />
+			<ModalV msj={ errors.e4 } visi={ er4 } setVisi={ setER4 } />
 		</ImageBackground>
 	);
 }
@@ -180,6 +178,38 @@ const st = StyleSheet.create({
 	  
 	  backgroundColor: '#fff',
 	},
+	port:{
+		width: 350,
+		height: 50,
+
+		alignContent:"center",
+		textAlign: "center",
+
+		backgroundColor: "transparent",
+
+		borderBottomLeftRadius: 10,
+		borderBottomRightRadius: 10,
+	},
+	btn:{
+		width: 350,
+		height: 50,
+
+		alignContent:"center",
+		textAlign: "center",
+
+		backgroundColor: "#004E27",
+	},
+	layer:{
+		width: 350,
+		height: 45,
+
+		textAlign:"center",
+		textAlignVertical: "center",
+		paddingLeft: 1,
+		marginTop: 1,
+		color: "#ffff",
+		fontSize: 25, 
+	},
 	sepa1: {
 		height: 50,
 		borderBottomWidth: 2,
@@ -200,6 +230,7 @@ const st = StyleSheet.create({
 	},
 	d:{
 		width: 350,
+		backgroundColor: "#fff",
 		marginBottom: 2,
 	},
 });

@@ -9,7 +9,7 @@ import backimg from '../../../assets/back.png';
 
 export default function WeightProm( props ){
 	//component props
-	const { nav, weigth_, forrageConsum_, occupationPeriot_} = props;
+	const { nav, weigth_, forrageConsum_, occupationPeriot_} = 		props;
 	//******************************************************************************************************************* */
 	//Events of inputs
 	const list = [
@@ -30,18 +30,18 @@ export default function WeightProm( props ){
 	const [ openList, setOpen ] =           						useState(false);
 	const [ leyend, setLeyend ] = 									useState(list[0].key);
 
-	const [ sectionTwo, setSecTwo ] =   	useState(false);
-	const [ sectionThree, setSecThree ] =   useState(false);
-	const [ sectionFour, setSecFour ] =   	useState(false);
+	const [ sectionTwo, setSecTwo ] =   							useState(false);
+	const [ sectionThree, setSecThree ] =   						useState(false);
+	const [ sectionFour, setSecFour ] =   							useState(false);
 
 	//control error events
-	const [ er1, setER1 ] =             	useState(false);
-	const [ er2, setER2 ] =             	useState(false);
+	const [ er1, setER1 ] =             							useState(false);
+	const [ er2, setER2 ] =             							useState(false);
 
 	//Memory of shippable data
-	const [ pWeight, setWeigth ] =        	useState(0);
-	const [ forrageConsum, setFC_ ] =     	useState(0);
-	const [ occupationPeriot, setOP_ ] =  	useState(0);
+	const [ pWeight, setWeigth ] =        							useState(0);
+	const [ forrageConsum, setFC_ ] =     							useState(0);
+	const [ occupationPeriot, setOP_ ] =  							useState(0);
 	//******************************************************************************************************************* */
 	function promWeight( e ){
 		if( e>1 ){
@@ -100,8 +100,8 @@ export default function WeightProm( props ){
 		{/* _______________________________________________________________SECTION TWO_________________________ */}
 		{sectionTwo?(
 			<View>
-				<View style={st.sepa1}></View>
-				<View style={st.sepa2}></View>
+				<View style={st.sepa1} />
+				<View style={st.sepa2} />
 				<Text style={st.tx}>{texts.tT2}</Text>
 				<Inputs 
 					placeholder={placeholders.p2} leyend={texts.t2}
@@ -113,8 +113,8 @@ export default function WeightProm( props ){
 		{/* _______________________________________________________________SECTION THREE_________________________ */}
 		{sectionThree?(
 			<View>
-				<View style={st.sepa1}></View>
-				<View style={st.sepa2}></View>
+				<View style={st.sepa1} />
+				<View style={st.sepa2} />
 				<View>
 					<View style={st.e}>
 						<SingleButton tile={leyend} press={()=>setOpen(!openList)} />
@@ -141,8 +141,8 @@ export default function WeightProm( props ){
 		{/* _______________________________________________________________SECTION FOUR_________________________ */}
 		{sectionFour?(
 			<View>
-				<View style={ st.sepa1 }></View>
-				<View style={ st.sepa2 }></View>
+				<View style={st.sepa1} />
+				<View style={st.sepa2} />
 				<SingleButton tile="Siguiente" press={ sendData }/>
 			</View>
 		):<View></View>}
