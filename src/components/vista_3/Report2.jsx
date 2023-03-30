@@ -9,24 +9,17 @@ export default function Report2( props ){
 		forragePaddock,
 		realForragePaddock,
 		animalCharge,
-		realCharge,} =                                  props
-
-	const refrag = () => {console.log("shot")};
-	
+		realCharge,} =                                  props;
 	return (
 	<ImageBackground source={backimg} resizeMode="cover" style={st.container}>
 		<View style={st.cont}>
 		   <Text>Cantidad de potreros:                  {parseFloat(paddockLog).toFixed()} </Text>
-		   <Text>Área indivifual:                       {parseFloat(areaPaddock).toFixed()} m²</Text>
+		   <Text>Área individual:                       {parseFloat(areaPaddock).toFixed()} m²</Text>
 		   <Text>Hierba por potrero:                    {parseFloat(forragePaddock).toFixed()} gr/m²</Text>
 		   <Text>Hierba real por potrero:               {parseFloat(realForragePaddock).toFixed()} gr/m²</Text>
+		   <Text>_______________________________________</Text>
 		   <Text>                                       {parseFloat(animalCharge).toFixed()} cabeza de ganado</Text>
 		   <Text>                                       {parseFloat(realCharge).toFixed()} cabezas de ganado</Text>
-		</View>
-		<View>
-			<View style={st.sepa1} />
-			<View style={st.sepa2} />
-			<SingleButton tile="Siguiente" press={refrag}/>
 		</View>
 	</ImageBackground>)
 }

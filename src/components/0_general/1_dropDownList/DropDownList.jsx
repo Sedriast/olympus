@@ -1,10 +1,9 @@
 import { LinearGradient } from "expo-linear-gradient";
 import { useState } from "react";
-import { StyleSheet, View, Text } from "react-native";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
 
 export default function DropDownList( props ) {
-	const { initLayer, list } = props;
+	const { initLayer, list, press } = 									props;
 	//---------------------------------------------------------------------------------------------------
 	const [ openList, setOpen ] =           						useState(false);
 	const [ leyend, setLeyend ] = 											useState(initLayer);
@@ -12,16 +11,16 @@ export default function DropDownList( props ) {
   return (
 		<View>
 			<LinearGradient colors={[ 'transparent', '#7FA4A2', '#7FA4A2' ]} style={ st.port }>
-				<TouchableOpacity onPress={ console.log("sad") }>
+				<TouchableOpacity onPress={ ()=>setOpen( !openList ) }>
 					<Text style={ st.layer }>{ leyend }</Text>
 				</TouchableOpacity>
 			</LinearGradient>
 		{openList?(
 			<View style={ st.r }>
-			{list.map(( e,i )=>{
+			{list.map(( elem, i )=>{
 			return (
-				<TouchableOpacity style={ st.btn } onPress={ press }>
-					<Text style={ st.layer }>{ e.key }</Text>
+				<TouchableOpacity key={ i } style={ st.btn } onPress={() =>{ press(elem.sleep, elem.key); setOpen( !openList ); setLeyend(elem.key)}}>
+					<Text style={ st.layer }>{ elem.key }</Text>
 				</TouchableOpacity>
 			)})}
 			</View>):(<View></View>)}
@@ -44,6 +43,8 @@ const st = StyleSheet.create({
 	btn:{
 		width: 350,
 		height: 50,
+
+		marginTop: 1,
 
 		alignContent:"center",
 		textAlign: "center",

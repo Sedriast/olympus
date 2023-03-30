@@ -10,11 +10,11 @@ export default function SingleButton( props ) {
 }
 const st = StyleSheet.create({
 	btn:{
-		width: 350,
 		height: 50,
-		backgroundColor: "#004E27",
+		backgroundColor: "#7ABF02",
 		alignContent:"center",
 		textAlign: "center",
+		borderRadius: 40,
 	},
 	layer:{
 		width: 350,

@@ -6,6 +6,7 @@ import SingleButton from '../0_general/1_buttons/SingleButton';
 import Inputs from '../0_general/1_input/Inputs';
 
 import backimg from '../../../assets/back.png';
+import DropDownList from '../0_general/1_dropDownList/DropDownList';
 
 export default function WeightProm( props ){
 	//component props
@@ -115,27 +116,7 @@ export default function WeightProm( props ){
 			<View>
 				<View style={st.sepa1} />
 				<View style={st.sepa2} />
-				<View>
-					<View style={st.e}>
-						<SingleButton tile={leyend} press={()=>setOpen(!openList)} />
-					</View>
-					{openList?(
-					<View style={st.r}>
-						{list.map((e,i)=>{
-						return (
-							<View key = {i} style = {st.d}>
-								<SingleButton 
-									tile =  {e.key}
-									press = {()=>{
-										forrageConsumFunc(e.sleep);
-										setLeyend(e.key);
-										setOpen(!openList);}}>
-									{e.key}
-								</SingleButton>
-							</View>
-						)})}
-					</View>):(<View></View>)}
-				</View>
+				<DropDownList initLayer="Calidad de la hierba" list={ list } press={ forrageConsumFunc } />
 			</View>
 		):<View></View>}
 		{/* _______________________________________________________________SECTION FOUR_________________________ */}

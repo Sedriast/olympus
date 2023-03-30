@@ -7,8 +7,6 @@ import ModalV from '../0_general/1_modal/ModalV';
 import backimg from '../../../assets/back.png';
 import SingleButton from '../0_general/1_buttons/SingleButton';
 import DropDownList from '../0_general/1_dropDownList/DropDownList';
-import { LinearGradient } from 'expo-linear-gradient';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 
 export default function AreaEP( props ){
 	//component props
@@ -113,22 +111,7 @@ export default function AreaEP( props ){
 			<View>
 				<View style={ st.sepa1 } />
 				<View style={ st.sepa2 } />
-				<LinearGradient colors={[ 'transparent', '#7FA4A2', '#7FA4A2' ]} style={ st.port }>
-					<TouchableOpacity onPress={ ()=>{setOpen( !openList )} }>
-						<Text style={ st.layer }>{ leyend }</Text>
-					</TouchableOpacity>
-				</LinearGradient>
-				<View>
-					{openList?(
-					<View style={ st.r }>
-					{list.map(( e,i )=>{
-					return (
-						<TouchableOpacity key={ i } style={ st.btn } onPress={ console.log( "sdfa" ) }>
-							<Text style={ st.layer }>{ e.key }</Text>
-						</TouchableOpacity>
-					)})}
-					</View>):(<View></View>)}
-				</View>
+				<DropDownList initLayer="Tipo de hierba" list={ list } press={ forrageFunc } />
 			</View>):<View></View>}
 			{/* _____________________________________SECTION THREE_________________________*/}
 			{sectionThree?(
@@ -197,7 +180,7 @@ const st = StyleSheet.create({
 		alignContent:"center",
 		textAlign: "center",
 
-		backgroundColor: "#004E27",
+		backgroundColor: "#7ABF02",
 	},
 	layer:{
 		width: 350,
