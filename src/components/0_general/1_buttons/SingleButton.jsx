@@ -11,23 +11,27 @@ export default function SingleButton( props ) {
 const st = StyleSheet.create({
 	btn:{
 		height: 50,
+
 		backgroundColor: "#7ABF02",
+
 		alignContent:"center",
 		textAlign: "center",
+
 		borderRadius: 40,
+
+		paddingLeft: 20,
+		paddingRight: 20,
 	},
 	layer:{
-		width: 350,
-		height: 45,
+		height: 50,
+
 		textAlign:"center",
 		textAlignVertical: "center",
+
 		paddingLeft: 1,
 		marginTop: 1,
+
 		color: "#ffff",
 		fontSize: 25,
 	},
-	gr:{
-		borderBottomLeftRadius: 10,
-		borderBottomRightRadius: 10,
-	}
 });

@@ -1,10 +1,14 @@
-import { View, StyleSheet, ImageBackground, Text } from 'react-native';
+import { View, StyleSheet, ImageBackground, Image } from 'react-native';
 import { useState } from 'react';
 
 import Inputs from '../0_general/1_input/Inputs';
 import ModalV from '../0_general/1_modal/ModalV';
 
 import backimg from '../../../assets/back.png';
+import area from '../../../assets/deco/icoa.png';
+import pasto from '../../../assets/deco/pasto.png';
+import vaca from '../../../assets/deco/vaca.png';
+
 import SingleButton from '../0_general/1_buttons/SingleButton';
 import DropDownList from '../0_general/1_dropDownList/DropDownList';
 
@@ -12,28 +16,25 @@ export default function AreaEP( props ){
 	//component props
 	const { nav, area_, forrageVariety_, forrageRest_, aforo_ } = 	props;
 	//******************************************************************************************************************* */
-	//Event list
-	const [ openList, setOpen ] =           						useState(false);
-	const [ leyend, setLeyend ] = 											useState("Tipo de hierba");
 	//Events inputs
 	const [ sectionTwo,     setSecTwo ] =   						useState(false);
 	const [ sectionThree,   setSecThree ] = 						useState(false);
 	const [ sectionFour,    setSecFour ] =  						useState(false);
 	const list = [
 		{   
-			key: "Kikuyo",
+			key: "KIKUYO",
 			sleep: 35,
 		},
 		{   
-			key: "Ryegrass",
+			key: "RYEGRASS",
 			sleep: 35,
 		},
 		{   
-			key: "Carreton rojo",
+			key: "CARRETON ROJO",
 			sleep: 35,
 		},
 		{   
-			key: "Carreton blanco",
+			key: "CARRETON BLANCO",
 			sleep: 35,
 		},
 	]
@@ -43,10 +44,10 @@ export default function AreaEP( props ){
 	const [ er3, setER3 ] =                 						useState(false);
 	const [ er4, setER4 ] =                 						useState(false);
 	//Memory of shippable data
-	const [ areaEF, setAreaEF ] =             					useState(0.1);
-	const [ forrageVariety, setFV_ ] =         					useState(1);
+	const [ areaEF, setAreaEF ] =             						useState(0.1);
+	const [ forrageVariety, setFV_ ] =         						useState(1);
 	const [ forrageRest, setFR_ ] =         						useState(1);
-	const [ aforo, setAforo ] =         								useState(1);
+	const [ aforo, setAforo ] =         							useState(1);
 	//******************************************************************************************************************* */
 	function terrainArea(e){
 		if(e > -0.1){
@@ -106,13 +107,18 @@ export default function AreaEP( props ){
 					endEd={e=>terrainArea(parseFloat(e.nativeEvent.text))}
 				/>
 			</View>
+			<Image style={st.icoa} source={area} />
 			{/* _____________________________________SECTION TWO___________________________ */}
-			{sectionTwo?(
+			{sectionTwo?(<>
 			<View>
 				<View style={ st.sepa1 } />
 				<View style={ st.sepa2 } />
+
 				<DropDownList initLayer="Tipo de hierba" list={ list } press={ forrageFunc } />
-			</View>):<View></View>}
+			</View>
+			<Image style={st.pas} source={pasto} /></>
+			):<View></View>
+			}
 			{/* _____________________________________SECTION THREE_________________________*/}
 			{sectionThree?(
 			<View>
@@ -123,13 +129,15 @@ export default function AreaEP( props ){
 					type="numeric" keyType="numeric"
 					chText={ e=>aforoFunc(parseFloat(e).toFixed()) }
 				/>
+
+				<Image style={st.vac} source={vaca} />
 			</View>):<View></View>}
 			{/* _____________________________________SECTION FOUR_________________________ */}
 			{sectionFour?(
 			<View>
 				<View style={ st.sepa1 } />
 				<View style={ st.sepa2 } />
-				<SingleButton tile="Siguiente" press={ sendData }/>
+				<SingleButton tile="SIGUIENTE" press={ sendData }/>
 			</View>):<View></View>}
 			{/* _____________________________________ERRORS SECTION________________________ */}
 			<ModalV msj={ errors.e1 } visi={ er1 } setVisi={ setER1 } />
@@ -140,17 +148,17 @@ export default function AreaEP( props ){
 	);
 }
 const texts = {
-	t1: "El Area efectiva de pastoreo, en Hectareas, es:",
-	t2: "Aforo (gr/m2)",
+	t1: "EL ÁREA EFECTIVA DE PASTOREO EN HECTÁREAS ES:",
+	t2: "LA PRODUCCIÓN DE PASTO POR METRO CUADRADO ES:",
 }
 const placeholders = {
-	p1: "El Area efectiva de pastoreo",
+	p1: "Área efectiva de pastoreo",
 	p2: "gr/m2",
 }
 const errors = {
-	e1: "El area no puede estar vacia, porfavor reintente",
-	e2: "A ocurrido un error inesperado en referente al tipo de forraje seleccionado",
-	e3: "El aforo no puede estar vacio, porfavor reintente",
+	e1: "El área es incorrecta,reintente",
+	e2: "A ocurrido un error en el tipo de pasto",
+	e3: "Aforo incorrecto, porfavor reintente",
 	e4: "A ocurrido un error inesperado, porfavor reintente",
 }
 const st = StyleSheet.create({
@@ -215,5 +223,34 @@ const st = StyleSheet.create({
 		width: 350,
 		backgroundColor: "#fff",
 		marginBottom: 2,
+	},
+	icoa:{
+		width: 200,
+		height: 200,
+
+		position: "absolute",
+
+		left: -85,
+		top: 205,
+
+		zIndex: 0,
+	},
+	pas:{
+		position: "absolute",
+
+		width: 150,
+		height: 200,
+
+		bottom: -30,
+		right: 10,
+	},
+	vac:{
+		position: "absolute",
+
+		width: 175,
+		height: 175,
+
+		top: -375,
+		right: -100,
 	},
 });

@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, ImageBackground } from 'react-native';
+import { StyleSheet, Image, View, ImageBackground } from 'react-native';
 import { useState } from 'react';
 
 import ModalV from '../0_general/1_modal/ModalV';
@@ -6,6 +6,10 @@ import SingleButton from '../0_general/1_buttons/SingleButton';
 import Inputs from '../0_general/1_input/Inputs';
 
 import backimg from '../../../assets/back.png';
+import balan from '../../../assets/deco/balan.png';
+import cuva from '../../../assets/deco/cuva.png';
+import fardo from '../../../assets/deco/fardo.png';
+
 import DropDownList from '../0_general/1_dropDownList/DropDownList';
 
 export default function WeightProm( props ){
@@ -27,10 +31,6 @@ export default function WeightProm( props ){
 			sleep: 0.15,
 		},
 	]
-	//Events lists
-	const [ openList, setOpen ] =           						useState(false);
-	const [ leyend, setLeyend ] = 									useState(list[0].key);
-
 	const [ sectionTwo, setSecTwo ] =   							useState(false);
 	const [ sectionThree, setSecThree ] =   						useState(false);
 	const [ sectionFour, setSecFour ] =   							useState(false);
@@ -89,42 +89,52 @@ export default function WeightProm( props ){
 	//******************************************************************************************************************* */
 	return (
 	<ImageBackground source={backimg} resizeMode="cover" style={st.container}>
+		<View style={ st.back } >
+			<SingleButton tile="ATRÁS" press={ () => nav.navigate("first") }/>
+		</View>
 		{/* _______________________________________________________________SECTION ONE________________________ */}
 		<View>
-			<Text style={st.tx}>{texts.tT1}</Text>
 			<Inputs 
-				placeholder={placeholders.p1} leyend={texts.t1}
+				placeholder={placeholders.p1} leyend={texts.tT1}
 				type="numeric" keyType="numeric"
 				endEd={(e)=>{promWeight(parseFloat(e.nativeEvent.text))}}
 			/>
 		</View>
+		<Image style={st.bal} source={balan} />
 		{/* _______________________________________________________________SECTION TWO_________________________ */}
-		{sectionTwo?(
-			<View>
-				<View style={st.sepa1} />
-				<View style={st.sepa2} />
-				<Text style={st.tx}>{texts.tT2}</Text>
-				<Inputs 
-					placeholder={placeholders.p2} leyend={texts.t2}
-					type="numeric" keyType="numeric"
-					endEd={(e)=>{occupationPeriotFunc(parseFloat(e.nativeEvent.text))}}
-				/>
-			</View>
+		{sectionTwo?(<>
+		<View>
+			<View style={st.sepa1} />
+			<View style={st.sepa2} />
+			
+			<Inputs 
+				placeholder={placeholders.p2} leyend={texts.tT2}
+				type="numeric" keyType="numeric"
+				endEd={(e)=>{occupationPeriotFunc(parseFloat(e.nativeEvent.text))}}
+			/>
+		</View>
+		
+		<Image style={st.cuva} source={cuva} /></>
 		):(<View></View>)}
 		{/* _______________________________________________________________SECTION THREE_________________________ */}
-		{sectionThree?(
-			<View>
-				<View style={st.sepa1} />
-				<View style={st.sepa2} />
-				<DropDownList initLayer="Calidad de la hierba" list={ list } press={ forrageConsumFunc } />
-			</View>
+		{sectionThree?(<>
+		<View>
+			<View style={st.sepa1} />
+			<View style={st.sepa2} />
+
+			<DropDownList initLayer="Calidad de la hierba" list={ list } press={ forrageConsumFunc } />	
+		</View>
+
+		<Image style={st.fardo} source={fardo} /></>
+		
 		):<View></View>}
 		{/* _______________________________________________________________SECTION FOUR_________________________ */}
 		{sectionFour?(
 			<View>
 				<View style={st.sepa1} />
 				<View style={st.sepa2} />
-				<SingleButton tile="Siguiente" press={ sendData }/>
+
+				<SingleButton tile="CREAR" press={ sendData }/>
 			</View>
 		):<View></View>}
 		{/* _______________________________________________________________ERRORS SECTION______________________ */}
@@ -181,5 +191,42 @@ const st = StyleSheet.create({
 	d:{
 		width: 350,
 		marginBottom: 2,
+	},
+	back:{
+		position: "absolute",
+
+		top: 50,
+		left: 20,
+
+		height: 40,
+	},
+	bal:{
+		width: 200,
+		height: 200,
+
+		position: "absolute",
+
+		right: -80,
+		top: 150,
+
+		zIndex: 0,
+	},
+	cuva:{
+		position: "absolute",
+
+		width: 200,
+		height: 200,
+
+		bottom: -35,
+		left: 10,
+	},
+	fardo:{
+		position: "absolute",
+
+		width: 175,
+		height: 175,
+
+		bottom: -15,
+		right: -20,
 	},
 })

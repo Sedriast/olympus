@@ -17,24 +17,20 @@ export default function Inputs( props ) {
 	return (
 		<View style={ st.container }>
 			<Text style={ st.ley }>{ leyend }</Text>
-			<LinearGradient
-				colors={[ 'transparent', 'white', 'white' ]}
-				style={st.gr}>
-				<TextInput
-					style={st.input}
-					autoComplete='off'
-					inputMode={type}
-					keyboardType={keyType}
-					placeholder={placeholder}
-					onChange={change}
-					onBlur={blur_}
-					onFocus={focus_}
-					onEndEditing={endEd}
-					onChangeText={chText}
-					value={value}
-					selectTextOnFocus={true}
-				/>
-			</LinearGradient>
+			<TextInput
+				style={st.input}
+				autoComplete='off'
+				inputMode={type}
+				keyboardType={keyType}
+				placeholder={placeholder}
+				onChange={change}
+				onBlur={blur_}
+				onFocus={focus_}
+				onEndEditing={endEd}
+				onChangeText={chText}
+				value={value}
+				selectTextOnFocus={true}
+			/>
 		</View>
 	);
 }
@@ -43,26 +39,29 @@ const st = StyleSheet.create({
 		alignItems: 'center',
 		justifyContent: 'center',
 	},
-	input:{
-		width: 350,
-		height: 40,
-		fontSize: 30,
-		backgroundColor: "transparent",
-		borderBottomLeftRadius:10,
-		borderBottomRightRadius:10,
-		borderBottomColor: "black",
-		paddingTop:0,
-		paddingBottom:0,
-		paddingLeft:20,
-		paddingRight:20,
-	},
 	ley:{
-		width: 350,
-		height: 40,
-		fontSize: 20 ,
+		width: 300,
+
+		fontSize: 25,
+		color: "white",
+
+		zIndex: 1,
 	},
-	gr:{
-		borderBottomLeftRadius: 10,
-		borderBottomRightRadius: 10,
-	}
+	input:{
+		width: 300,
+		height: 40,
+
+		fontSize: 25,
+		backgroundColor: "white",
+		borderRadius: 10,
+
+		marginTop: 20,
+
+		paddingTop: 0,
+		paddingBottom: 0,
+		paddingLeft: 20,
+		paddingRight: 20,
+
+		zIndex: 1,
+	},
   });

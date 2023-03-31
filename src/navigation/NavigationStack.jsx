@@ -12,40 +12,41 @@ const Stack = createNativeStackNavigator();
 
 export default function NavigationStack(){
 	//State variables
-		const [ areaEP, setAreaEP_ ] =        		useState(1);
+	const [ areaEP, setAreaEP_ ] =        			useState(1);
 	const [ forrageVariety, setFV_ ] =     			useState(1);
-	const [ aforo, setAforo_ ] =   							useState(1);
+	const [ aforo, setAforo_ ] =   					useState(1);
 	const [ animalWeight, setWeight_ ] =   			useState(1);
-	const [ forrageConsum, setFC_ ] =						useState(1);
-	const [ occupationPeriot, setOP_ ] =				useState(1);
-	const [ forrageRest, setFR_ ] = 						useState(1);
+	const [ forrageConsum, setFC_ ] =				useState(1);
+	const [ occupationPeriot, setOP_ ] =			useState(1);
+	const [ forrageRest, setFR_ ] = 				useState(1);
 
 	//Constants
-	const perdidaPastoreo = 										0.2;
-	const grazingDays = 												forrageRest + occupationPeriot;
-	const UGG = 																450;
+	const perdidaPastoreo = 						0.2;
+	const grazingDays = 							forrageRest + occupationPeriot;
+	const UGG = 									450;
 
-	const report = () => {
+	function report(e) {
 		//******************************************************************************************* */
-		let NoPaddocks = 													(forrageRest / occupationPeriot) + 1;
-		let areaPaddocks =												(areaEP*10000)/parseFloat(NoPaddocks).toFixed();
-		let forragePaddock = 											(areaPaddocks*aforo)/1000;
-		let realForragePaddock = 									forragePaddock-(forragePaddock*perdidaPastoreo);
-		let animalCharge = 												realForragePaddock / (occupationPeriot * (animalWeight * forrageConsum));
-		let realCharge =													((animalCharge * animalWeight) / UGG);
+		let NoPaddocks = 							(forrageRest / occupationPeriot) + 1;
+		let areaPaddocks =							(areaEP*10000)/parseFloat(NoPaddocks).toFixed();
+		let forragePaddock = 						(areaPaddocks*aforo)/1000;
+		let realForragePaddock = 					forragePaddock-(forragePaddock*perdidaPastoreo);
+		let animalCharge = 							realForragePaddock / (occupationPeriot * (animalWeight * forrageConsum));
+		let realCharge =							((animalCharge * animalWeight) / UGG);
 
-		let unk_1 = 															realCharge * animalWeight * forrageConsum;
-		let unk_2 = 															realForragePaddock / unk_1;
-		let unk_3 = 															Math.sqrt(areaPaddocks);
+		let unk_1 = 								realCharge * animalWeight * forrageConsum;
+		let unk_2 = 								realForragePaddock / unk_1;
+		let unk_3 = 								Math.sqrt(areaPaddocks);
 		
 		return (
 			<Report2 
-				paddockLog =													{NoPaddocks}
-				areaPaddock =													{areaPaddocks}
-				forragePaddock =											{forragePaddock}
-				realForragePaddock =									{realForragePaddock}
-				animalCharge =												{animalCharge}
-				realCharge =													{realCharge}
+				nav = 								{e}
+				paddockLog =						{NoPaddocks}
+				areaPaddock =						{areaPaddocks}
+				forragePaddock =					{forragePaddock}
+				realForragePaddock =				{realForragePaddock}
+				animalCharge =						{animalCharge}
+				realCharge =						{realCharge}
 			/>
 		);
 	}
@@ -55,20 +56,12 @@ export default function NavigationStack(){
 					{e=><AreaEP nav={e.navigation} area_={setAreaEP_} forrageVariety_={setFR_} forrageRest_={setFV_} aforo_={setAforo_} />}
 				</Stack.Screen>
 
-				<Stack.Screen name="second" options={{ 
-					title: 'Pesos, forraje y ocupación', 
-					headerStyle: {backgroundColor: '#E2FFE2',},
-					headerShadowVisible: false, 
-					}} >
+				<Stack.Screen name="second" options={{ title: '', headerShown: false,}} >
 					{e=><WeightProm nav={e.navigation} weigth_={setWeight_} forrageConsum_={setFC_} occupationPeriot_={setOP_}/>}
 				</Stack.Screen>
 
-				<Stack.Screen name="report" options={{ 
-					title: 'Reporte', 
-					headerStyle: { backgroundColor: '#E2FFE2',},
-					headerShadowVisible: false,
-					}} >
-					{report}
+				<Stack.Screen name="report" options={{ title: '', headerShown: false,}} >
+					{e=>report(e.navigation)}
 				</Stack.Screen>
 		</Stack.Navigator>
 	);
