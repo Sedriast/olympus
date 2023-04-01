@@ -114,7 +114,7 @@ export default function AreaEP( props ){
 				<View style={ st.sepa1 } />
 				<View style={ st.sepa2 } />
 
-				<DropDownList initLayer="Tipo de hierba" list={ list } press={ forrageFunc } />
+				<DropDownList initLayer="TIPO DE PASTO" list={ list } press={ forrageFunc } />
 			</View>
 			<Image style={st.pas} source={pasto} /></>
 			):<View></View>
@@ -137,6 +137,7 @@ export default function AreaEP( props ){
 			<View>
 				<View style={ st.sepa1 } />
 				<View style={ st.sepa2 } />
+
 				<SingleButton tile="SIGUIENTE" press={ sendData }/>
 			</View>):<View></View>}
 			{/* _____________________________________ERRORS SECTION________________________ */}

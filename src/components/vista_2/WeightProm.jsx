@@ -122,7 +122,7 @@ export default function WeightProm( props ){
 			<View style={st.sepa1} />
 			<View style={st.sepa2} />
 
-			<DropDownList initLayer="Calidad de la hierba" list={ list } press={ forrageConsumFunc } />	
+			<DropDownList initLayer="CALIDAD DEL PASTO" list={ list } press={ forrageConsumFunc } />	
 		</View>
 
 		<Image style={st.fardo} source={fardo} /></>
