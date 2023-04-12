@@ -16,15 +16,24 @@ export default function Report2( props ){
 			<SingleButton tile="ATRÁS" press={ () => nav.navigate("second") }/>
 		</View>
 		<View style={st.cont}>
-		   <Text style={st.t}>CANTIDAD DE POTREROS:																		{parseFloat(paddockLog).toFixed()} </Text>
-		   <Text style={st.t}>ÁREA DEL POTRERO:														{parseFloat(areaPaddock).toFixed()} m²</Text>
-		  
-		   <Text style={st.t}>PRODUCCIÓN DE PASTO:	{parseFloat(realForragePaddock).toFixed()} gr/m²</Text>
-		   <Text style={st.t}>_______________________________________</Text>
-		   <Text style={st.t}>EN EL POTRERO SE PUEDEN MANTENER {parseFloat(realCharge).toFixed()} CABEZAS DE GANADO</Text>
+		   	<Text style={st.t}>CANTIDAD DE POTREROS: </Text>
+		   	<Text style={st.tr}>{parseFloat(paddockLog).toFixed()}</Text>
+			<Text />
+		   	<Text style={st.t}>ÁREA DE CADA POTRERO: </Text>
+			<Text style={st.tr}>{parseFloat(areaPaddock).toFixed()} m²</Text>
+
+			<Text />
+		   	<Text style={st.t}>PRODUCCIÓN DE PASTO:	</Text>
+		   	<Text style={st.tr}>{parseFloat(realForragePaddock).toFixed()} gr/m²</Text>
+			<Text />
+			<Text style={st.tr}>____________________________</Text>
+		   	
+			<Text />
+			<Text style={st.t}>LOS POTREROS PUEDEN MANTENER</Text>
+			<Text style={st.tr}>{parseFloat(realCharge).toFixed()} CABEZAS DE GANADO</Text>
 		</View>
 		<View style={ st.home } >
-			<SingleButton tile="INICO" press={ () => nav.navigate("first") }/>
+			<SingleButton tile="INICIO" press={ () => nav.navigate("cero") }/>
 		</View>
 	</ImageBackground>)
 }
@@ -37,15 +46,16 @@ const st = StyleSheet.create({
 		backgroundColor: '#fff',
 	},
 	cont: {
-		flex: 0.3,
-
-		width: 400,
+		width: 350,
+		height: 550,
 
 		alignItems: "flex-end",
 		justifyContent: "center",
 
-		paddingLeft: 20,
-		paddingRight: 20,
+		paddingLeft: 10,
+		paddingRight: 50,
+		paddingTop: 10,
+		paddingBottom: 10,
 
 		borderRadius: 20,
 		
@@ -67,6 +77,10 @@ const st = StyleSheet.create({
 		height: 40,
 	},
 	t:{
+		fontSize: 18,
+	},
+	tr:{
 		fontSize: 25,
+		fontStyle: "bold",
 	},
 })

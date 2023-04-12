@@ -7,6 +7,7 @@ import { StyleSheet } from 'react-native';
 import WeightProm from "../components/vista_2/WeightProm";
 import Report2 from "../components/vista_3/Report2";
 import AreaEP from "../components/vista_1/AreaEP";
+import Logos from "../components/vista_0/Logos";
 
 const Stack = createNativeStackNavigator();
 
@@ -52,6 +53,10 @@ export default function NavigationStack(){
 	}
 	return (
 		<Stack.Navigator >
+				<Stack.Screen name="cero" options={{ title: '', headerShown: false,}} >
+					{e=><Logos nav={e.navigation} />}
+				</Stack.Screen>
+
 				<Stack.Screen name="first" options={{ title: '', headerShown: false,}} >
 					{e=><AreaEP nav={e.navigation} area_={setAreaEP_} forrageVariety_={setFR_} forrageRest_={setFV_} aforo_={setAforo_} />}
 				</Stack.Screen>
