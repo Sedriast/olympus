@@ -1,228 +1,120 @@
-import { StyleSheet, Image, View, ImageBackground } from "react-native";
-import { useState } from "react";
+import { ImageBackground, StyleSheet, View } from "react-native";
 
-import ModalV from "../0_general/1_modal/ModalV";
-import SingleButton from "../0_general/1_buttons/SingleButton";
-import Inputs from "../0_general/1_input/Inputs";
-
-import backimg from "../../../assets/back.png";
-import balan from "../../../assets/deco/balan.png";
-import cuva from "../../../assets/deco/cuva.png";
-import fardo from "../../../assets/deco/fardo.png";
-
-import DropDownList from "../0_general/1_dropDownList/DropDownList";
+import Inputs from "../Fragments/Inputs";
+import Buttons from "../Fragments/Buttons";
+import DropDownList from "../Fragments/DropDownList";
 
 export default function BovineCaracteristics({
-	nav,
-	weigth_,
-	forrageConsum_,
-	occupationPeriot_,
+	background,
+	navigation_,
+	context: {
+		values = {},
+		section = [],
+		error = <></>,
+		languages = {},
+		operations = {},
+		decorations = {},
+		grassFreshness = [],
+	},
 }) {
-	const list = [
-		{
-			key: "Tierno",
-			sleep: 0.12,
-		},
-		{
-			key: "Medio",
-			sleep: 0.13,
-		},
-		{
-			key: "Viejo",
-			sleep: 0.15,
-		},
-	];
-	const [sectionTwo, setSecTwo] = useState(false);
-	const [sectionThree, setSecThree] = useState(false);
-	const [sectionFour, setSecFour] = useState(false);
+	const { COW, CART, BALANCE } = decorations;
+	const { leyends = {}, placeholders = {} } = languages;
+	const { forrageConsume, animalWeight, ocupationPeriode } = values;
+	const { END, FORRAGE_CONSUME, ANIMAL_WEIGHT, OCUPATION_PERIODE } = operations;
 
-	//control error events
-	const [er1, setER1] = useState(false);
-	const [er2, setER2] = useState(false);
-
-	//Memory of shippable data
-	const [pWeight, setWeigth] = useState(0);
-	const [forrageConsum, setFC_] = useState(0);
-	const [occupationPeriot, setOP_] = useState(0);
-	//******************************************************************************************************************* */
-	function promWeight(e) {
-		if (e > 1) {
-			setWeigth(e);
-			setSecTwo(true);
-		} else {
-			setER1(true);
-			setSecTwo(false);
-			setSecThree(false);
-			setSecFour(false);
-		}
-	}
-	function occupationPeriotFunc(e) {
-		if (e > 1) {
-			setOP_(e);
-			setSecThree(true);
-		} else {
-			setER1(true);
-			setSecThree(false);
-			setSecFour(false);
-		}
-	}
-	function forrageConsumFunc(e) {
-		if (e > 0) {
-			setFC_(e);
-			setSecFour(true);
-		} else {
-			setER2(true);
-			setSecFour(false);
-		}
-	}
-	function sendData() {
-		if (pWeight > 0 && forrageConsum > 0 && occupationPeriot > 0) {
-			weigth_(pWeight);
-			forrageConsum_(forrageConsum);
-			occupationPeriot_(occupationPeriot);
-
-			nav.navigate("report");
-		} else {
-			setER2(true);
-		}
-	}
-	//******************************************************************************************************************* */
 	return (
-		<ImageBackground source={backimg} resizeMode="cover" style={st.container}>
-			<View style={st.back}>
-				<SingleButton tile="ATRÁS" press={() => nav.navigate("first")} />
-			</View>
-			{/* _______________________________________________________________SECTION ONE________________________ */}
-			<View>
-				<Inputs
-					placeholder={placeholders.p1}
-					leyend={texts.tT1}
-					type="numeric"
-					keyType="numeric"
-					endEd={(e) => {
-						promWeight(parseFloat(e.nativeEvent.text));
-					}}
-				/>
-			</View>
-			<Image style={st.bal} source={balan} />
-			{/* _______________________________________________________________SECTION TWO_________________________ */}
-			{sectionTwo ? (
+		<ImageBackground
+			style={st.container}
+			source={background}
+			resizeMode="cover">
+			{error}
+
+			{/* 
+			<Image style={st.bal} source={balan} /> 
+			*/}
+
+			<Inputs
+				inputMode="numeric"
+				value={animalWeight}
+				keyboardType="numeric"
+				leyend={leyends.ANIMAL_WEIGHT}
+				placeholder={placeholders.ANIMAL_WEIGHT}
+				onEndEditing={(event) =>
+					ANIMAL_WEIGHT(parseFloat(event.nativeEvent.text))
+				}
+			/>
+			<View style={st.line} />
+
+			{section[0] && (
 				<>
-					<View>
-						<View style={st.sepa1} />
-						<View style={st.sepa2} />
-
-						<Inputs
-							placeholder={placeholders.p2}
-							leyend={texts.tT2}
-							type="numeric"
-							keyType="numeric"
-							endEd={(e) => {
-								occupationPeriotFunc(parseFloat(e.nativeEvent.text));
-							}}
-						/>
-					</View>
-
-					<Image style={st.cuva} source={cuva} />
+					<Inputs
+						inputMode="numeric"
+						keyboardType="numeric"
+						value={ocupationPeriode}
+						leyend={leyends.OCUPATION_PERIODE}
+						placeholder={placeholders.OCUPATION_PERIODE}
+						onEndEditing={(event) =>
+							OCUPATION_PERIODE(parseFloat(event.nativeEvent.text))
+						}
+					/>
+					<View style={st.line} />
 				</>
-			) : (
-				<View></View>
 			)}
-			{/* _______________________________________________________________SECTION THREE_________________________ */}
-			{sectionThree ? (
+
+			{section[1] && (
 				<>
-					<View>
-						<View style={st.sepa1} />
-						<View style={st.sepa2} />
-
-						<DropDownList
-							initLayer="CALIDAD DEL PASTO"
-							list={list}
-							press={forrageConsumFunc}
-						/>
-					</View>
-
-					<Image style={st.fardo} source={fardo} />
+					<DropDownList
+						value={forrageConsume}
+						items={grassFreshness}
+						dispatch={FORRAGE_CONSUME}
+						leyend={leyends.FORRAGE_CONSUME}
+					/>
+					<View style={st.line} />
 				</>
-			) : (
-				<View></View>
 			)}
-			{/* _______________________________________________________________SECTION FOUR_________________________ */}
-			{sectionFour ? (
-				<View>
-					<View style={st.sepa1} />
-					<View style={st.sepa2} />
 
-					<SingleButton tile="CREAR" press={sendData} />
+			{section[2] && (
+				<View style={st.btns}>
+					<Buttons
+						leyend={leyends.BUTTON_1}
+						press={() => navigation_.navigate("paddocksAreaForm")}
+					/>
+					<Buttons
+						leyend={leyends.BUTTON_2}
+						press={() => {
+							END();
+							navigation_.navigate("report");
+						}}
+					/>
 				</View>
-			) : (
-				<View></View>
 			)}
-			{/* _______________________________________________________________ERRORS SECTION______________________ */}
-			<ModalV msj={errors.e1} visi={er1} setVisi={setER1} />
-			<ModalV msj={errors.e2} visi={er2} setVisi={setER2} />
 		</ImageBackground>
 	);
 }
-const texts = {
-	t1: " ",
-	t2: "Periodo de ocupación",
-	tT1: "EL PESO PROMEDIO DE LOS EJEMPLARES, EN KG, ES:",
-	tT2: "EL PERIODO DE OCUPACIÓN EN DIAS ES:",
-};
-const placeholders = {
-	p1: "Peso en kilogramos",
-	p2: "Periodo en dias",
-};
-const errors = {
-	e1: "El peso de los ejemplares no puede ser inferior a 10 kilos",
-	e2: "Ha ocurrido un error inesperado, por favor verifique los datos  ",
-};
 const st = StyleSheet.create({
 	container: {
 		flex: 1,
 		alignItems: "center",
 		justifyContent: "center",
 
-		backgroundColor: "#fff",
+		backgroundColor: "rgb(0,0,0)",
 	},
-	tx: {
-		textAlign: "center",
-		fontSize: 25,
-		marginLeft: 10,
+	line: {
+		width: 300,
+		height: 5,
+
+		marginTop: 40,
 		marginBottom: 40,
-	},
-	sepa1: {
-		height: 50,
-		borderBottomWidth: 2,
-		borderBottomColor: "#000",
-	},
-	sepa2: {
-		height: 50,
-		borderTopWidth: 2,
-		borderTopColor: "#000",
-	},
-	r: {
-		width: 350,
-		backgroundColor: "#fff",
-	},
-	e: {
-		width: 350,
-		marginBottom: 10,
-	},
-	d: {
-		width: 350,
-		marginBottom: 2,
-	},
-	back: {
-		position: "absolute",
 
-		top: 50,
-		left: 20,
-
-		height: 40,
+		borderBottomWidth: 4,
+		borderBottomColor: "rgb(0,0,0)",
 	},
-	bal: {
+	btns: {
+		display: "flex",
+		flexDirection: "row",
+		justifyContent: "space-between",
+	},
+	b_ico: {
 		width: 200,
 		height: 200,
 
@@ -233,7 +125,7 @@ const st = StyleSheet.create({
 
 		zIndex: 0,
 	},
-	cuva: {
+	c_ico: {
 		position: "absolute",
 
 		width: 200,
@@ -242,7 +134,7 @@ const st = StyleSheet.create({
 		bottom: -35,
 		left: 10,
 	},
-	fardo: {
+	ca_icoo: {
 		position: "absolute",
 
 		width: 175,

@@ -11,10 +11,10 @@ const st = StyleSheet.create({
 	button_: {
 		height: 50,
 
-		backgroundColor: "#7ABF02",
+		backgroundColor: "rgb(200,200,0)",
 
-		alignContent: "center",
 		textAlign: "center",
+		alignContent: "center",
 
 		borderRadius: 40,
 
@@ -30,7 +30,7 @@ const st = StyleSheet.create({
 		paddingLeft: 1,
 		marginTop: 1,
 
-		color: "#ffff",
 		fontSize: 25,
+		color: "rgb(255,255,255)",
 	},
 });

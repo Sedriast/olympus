@@ -3,37 +3,39 @@ import { View, StyleSheet, ImageBackground } from "react-native";
 import Inputs from "../Fragments/Inputs";
 import Buttons from "../Fragments/Buttons";
 import DropDownList from "../Fragments/DropDownList";
-import {
-	Image,
-	SvgCss,
-	SvgCssUri,
-	SvgFromXml,
-	SvgUri,
-	SvgXml,
-} from "react-native-svg";
+// import {
+// 	Image,
+// 	SvgCss,
+// 	SvgCssUri,
+// 	SvgFromXml,
+// 	SvgUri,
+// 	SvgXml,
+// } from "react-native-svg";
 
 export default function PaddoksAreaForm({
+	background,
 	navigation_,
 	context: {
-		error = {},
 		values = {},
 		section = [],
+		error = <></>,
 		languages = {},
 		grassTypes = {},
 		operations = {},
 		decorations = {},
 	},
 }) {
-	const { capacity = 1, grazingArea = 0.1, forrageVR = "" } = values;
-	const { COW, AREA, GRASS, BACKGROUND } = decorations;
+	const { COW_HEAD, AREA, GRASS } = decorations;
 	const { leyends = {}, placeholders = {} } = languages;
-	const { CAPACITY, GRAZING_AREA, FORRAGE_VARIETY_AND_RESTANT } = operations;
+	const { capacity = 1, grazingArea = 0.1, forrageVR = "" } = values;
+	const { END, CAPACITY, GRAZING_AREA, FORRAGE_VARIETY_AND_RESTANT } =
+		operations;
 
 	return (
 		<ImageBackground
-			resizeMode="cover"
-			source={BACKGROUND}
-			style={st.container}>
+			style={st.container}
+			source={background}
+			resizeMode="cover">
 			{error}
 
 			{/*<Image style={st.e} source={COW} />
@@ -83,7 +85,10 @@ export default function PaddoksAreaForm({
 			{section[2] && (
 				<Buttons
 					leyend={leyends.BUTTON}
-					press={() => navigation_.navigate("bovineCaracteristics")}
+					press={() => {
+						END();
+						navigation_.navigate("bovineCaracteristics");
+					}}
 				/>
 			)}
 		</ImageBackground>
@@ -99,12 +104,16 @@ const st = StyleSheet.create({
 		backgroundColor: "rgb(0,0,0)",
 	},
 	line: {
-		width: 400,
-		height: 50,
-		borderBottomWidth: 2,
+		width: 300,
+		height: 5,
+
+		marginTop: 40,
+		marginBottom: 40,
+
+		borderBottomWidth: 4,
 		borderBottomColor: "rgb(0,0,0)",
 	},
-	c_ico: {
+	ch_ico: {
 		position: "absolute",
 
 		width: 175,

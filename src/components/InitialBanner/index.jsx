@@ -1,19 +1,20 @@
-import { StyleSheet, ImageBackground, Image } from "react-native";
+import { StyleSheet, Image, ImageBackground } from "react-native";
 
 import Buttons from "../Fragments/Buttons";
 
 export default function InitialBanner({
+	background,
 	navigation_,
 	context: { logos = {}, language = "" },
 }) {
-	const { GIZU, EBATE, CREING, BACKGROUND } = logos;
+	const { GIZU, EBATE, CREING } = logos;
 	return (
 		<ImageBackground
 			style={st.container}
-			source={BACKGROUND}
+			source={background}
 			resizeMode="cover">
-			<Image style={st.e} source={EBATE} />
 			<Image style={st.g} source={GIZU} />
+			<Image style={st.e} source={EBATE} />
 			<Image style={st.c} source={CREING} />
 			<Buttons
 				leyend={language}
@@ -29,9 +30,8 @@ const st = StyleSheet.create({
 		alignItems: "center",
 		justifyContent: "center",
 
-		backgroundColor: "#fff",
+		backgroundColor: "rgb(0,0,0)",
 	},
-
 	e: {
 		width: 150,
 		height: 150,

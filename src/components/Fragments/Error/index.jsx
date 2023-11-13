@@ -33,6 +33,7 @@ const st = StyleSheet.create({
 		height: "20%",
 
 		marginLeft: "5%",
+		padding: 15,
 
 		borderTopLeftRadius: 20,
 		borderTopRightRadius: 20,
