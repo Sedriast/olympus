@@ -1,22 +1,15 @@
 const language_keys = {
     ERRORS: "errors_lang",
-    LEYENDS: "leyends_lang",
-    PLACEHOLDERS: "placeholders_lang",
-};
-
-const icon_keys = {
-    COW: "cow_ico",
-    AREA: "area_ico",
-    CART: "cart_ico",
-    GRASS: "grass_ico",
-    COWHEAD: "cowhead_ico",
-    BALANCE: "balance_ico",
+    INITIAL_BANNER: "initial_banner_lang",
+    PADDOKS_AREA_FORM: "paddoks_area_form_lang",
 };
 
 const reducer_keys = {
+    ERROR: "error",
+    GENERAL: "general",
     CAPACITY: "capacity",
     GRAZING_AREA: "grazing_area",
     GRASS_VARIETY_AND_RESTANT: "grass_variety_and_restant",
 };
 
-export { language_keys, reducer_keys, icon_keys };
+export { language_keys, reducer_keys };

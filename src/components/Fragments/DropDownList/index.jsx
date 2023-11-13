@@ -2,17 +2,18 @@ import { useState } from "react";
 import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
 
 export default function DropDownList({
+	value = "",
 	items = [],
-	placeholder = "",
-	getItem = () => {},
+	leyend = "",
+	dispatch = () => {},
 }) {
 	const [isOpen, setIsOpen] = useState(false);
-	const [viewedValue, setViewedValue] = useState(placeholder);
 
 	return (
 		<View>
+			<Text style={st.l2}>{leyend}</Text>
 			<TouchableOpacity style={st.button_} onPress={() => setIsOpen(!isOpen)}>
-				<Text style={st.l}>{viewedValue}</Text>
+				<Text style={st.l}>{value}</Text>
 			</TouchableOpacity>
 			{isOpen ? (
 				<View style={st.list}>
@@ -22,8 +23,7 @@ export default function DropDownList({
 								key={index}
 								style={st.item}
 								onPress={() => {
-									getItem(item.name, item.timeToSleep);
-									setViewedValue(item.name);
+									dispatch(item.name, item.timeToSleep);
 									setIsOpen(!isOpen);
 								}}>
 								<Text style={st.ek}>{item.name}</Text>
@@ -39,8 +39,10 @@ export default function DropDownList({
 }
 const st = StyleSheet.create({
 	button_: {
-		width: 250,
 		height: 50,
+
+		paddingLeft: 1,
+		paddingRight: 1,
 
 		alignContent: "center",
 		textAlignVertical: "certer",
@@ -51,8 +53,6 @@ const st = StyleSheet.create({
 		borderRadius: 20,
 	},
 	list: {
-		width: 250,
-
 		alignContent: "center",
 		textAlign: "center",
 
@@ -63,7 +63,7 @@ const st = StyleSheet.create({
 		borderRadius: 20,
 	},
 	item: {
-		width: 250,
+		width: 300,
 		height: 50,
 
 		borderRadius: 10,
@@ -78,7 +78,7 @@ const st = StyleSheet.create({
 		backgroundColor: "#004E27",
 	},
 	l: {
-		width: 250,
+		width: 300,
 		height: 50,
 
 		textAlign: "center",
@@ -86,11 +86,20 @@ const st = StyleSheet.create({
 
 		paddingLeft: 1,
 		marginTop: 1,
-		color: "#ffff",
+		color: "rgb(230,230,230)",
 		fontSize: 25,
 	},
-	ek: {
+	l2: {
 		width: 250,
+
+		fontSize: 25,
+		color: "rgb(230,230,230)",
+		marginBottom: 10,
+
+		zIndex: 1,
+	},
+	ek: {
+		width: 300,
 		height: 45,
 
 		textAlign: "center",
@@ -98,7 +107,7 @@ const st = StyleSheet.create({
 
 		paddingLeft: 1,
 		marginTop: 1,
-		color: "#ffff",
+		color: "rgb(230,230,230)",
 		fontSize: 25,
 	},
 });

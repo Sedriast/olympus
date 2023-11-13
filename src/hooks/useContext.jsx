@@ -2,12 +2,13 @@ import React from "react";
 
 import { reducer } from "./reducer";
 import { es } from "../constants/i18n";
-import { icon_keys, language_keys, reducer_keys } from "../constants/keys";
+import { language_keys, reducer_keys } from "../constants/keys";
 
 import Error from "../components/Fragments/Error";
-import Icon, { Img_ } from "../constants/Icons";
+import { Img_ } from "../constants/Img_";
 
 export const GeneralContext = React.createContext();
+const { PNG_, SVG_ } = Img_;
 
 export default function GenProvider({ children }) {
 	const [state, dispatch] = React.useReducer(reducer, {
@@ -19,20 +20,36 @@ export default function GenProvider({ children }) {
 		forrageRestant: 1,
 		occupationPeriode: 1,
 		sectionsSubProvider: [false, false, false],
+		forrageVariety:
+			es[language_keys.PADDOKS_AREA_FORM].placeholders.GRASS_VARIETY,
 	});
+	const errorOff = () => {
+		dispatch({
+			type: reducer_keys.GENERAL,
+			payload: { error: <></>, grazingArea: 1 },
+		});
+	};
 
 	const statics = {
 		grazingLost: 0.2,
 		largeLivestockUnits: 450,
+		cError: (error) => <Error leyend={error} close={errorOff} />,
 	};
 
 	const initialBanner = {
-		logos: Img_,
-		languge: es[language_keys.LEYENDS].BUTTON_IB,
+		logos: PNG_,
+		language: es[language_keys.INITIAL_BANNER].BUTTON_IB,
 	};
+
 	const paddocksAreaForm = {
 		error: state.error,
 		section: state.sectionsSubProvider,
+		languages: es[language_keys.PADDOKS_AREA_FORM],
+		values: {
+			forrageVR: state.forrageVariety,
+			capacity: state.capacity,
+			grazingArea: state.grazingArea,
+		},
 		grassTypes: [
 			{ name: "kikuyo", timeToSleep: 33 },
 			{ name: "ryegrass", timeToSleep: 33 },
@@ -40,36 +57,72 @@ export default function GenProvider({ children }) {
 			{ name: "white carreton", timeToSleep: 33 },
 		],
 		decorations: {
-			cow: Icon[icon_keys.COW],
-			area: Icon[icon_keys.AREA],
-			background: Img_.background,
-			grass: Icon[icon_keys.GRASS],
+			COW: SVG_.COW,
+			AREA: SVG_.AREA,
+			GRASS: SVG_.GRASS,
+			BACKGROUND: PNG_.BACKGROUND,
 		},
 		operations: {
-			GRAZING_AREA: (grazingArea_ = 0.1) => {
-				grazingArea > 0
+			GRAZING_AREA: (grazingArea_ = 0) => {
+				grazingArea_ > 0
 					? dispatch({
-							type: reducer_keys.GRAZING_AREA,
+							type: reducer_keys.GENERAL,
 							payload: {
 								grazingArea: grazingArea_,
 								sectionsSubProvider: [true, false, false],
 							},
 					  })
 					: dispatch({
-							type: reducer_keys.ERROR,
-							payload: <Error leyend={es.ERRORS.GRAZING_AREA} />,
+							type: reducer_keys.GENERAL,
+							payload: {
+								grazingArea: 1,
+								error: statics.cError(es[language_keys.ERRORS].GRAZING_AREA),
+								sectionsSubProvider: [false, false, false],
+							},
 					  });
 			},
-			FORRAGE_VARIETY_AND_RESTANT: (forrageVariety = 1) =>
-				dispatch({
-					type: reducer_keys.GRASS_VARIETY_AND_RESTANT,
-					payload: forrageVariety,
-				}),
-			CAPACITY: (capacity = 1) =>
-				dispatch({
-					type: reducer_keys.CAPACITY,
-					payload: capacity,
-				}),
+			FORRAGE_VARIETY_AND_RESTANT: (
+				forrageVariety_ = "",
+				forrageRestant_ = 0
+			) => {
+				forrageVariety_ != "" && forrageRestant_ > 0
+					? dispatch({
+							type: reducer_keys.GENERAL,
+							payload: {
+								forrageRestant: forrageRestant_,
+								forrageVariety: forrageVariety_,
+								sectionsSubProvider: [true, true, false],
+							},
+					  })
+					: dispatch({
+							type: reducer_keys.GENERAL,
+							payload: {
+								forrageRestant: 1,
+								forrageVariety:
+									es[language_keys.PADDOKS_AREA_FORM].placeholders
+										.GRASS_VARIETY,
+								error: statics.cError(es[language_keys.ERRORS].GRASS_TYPE),
+								sectionsSubProvider: [true, false, false],
+							},
+					  });
+			},
+			CAPACITY: (capacity = 0) =>
+				capacity > 0
+					? dispatch({
+							type: reducer_keys.GENERAL,
+							payload: {
+								capacity: capacity,
+								sectionsSubProvider: [true, true, true],
+							},
+					  })
+					: dispatch({
+							type: reducer_keys.GENERAL,
+							payload: {
+								capacity: 1,
+								error: statics.cError(es[language_keys.ERRORS].CAPACITY),
+								sectionsSubProvider: [true, true, false],
+							},
+					  }),
 		},
 	};
 

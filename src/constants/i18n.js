@@ -6,15 +6,21 @@ const es = {
         CAPACITY: "Aforo incorrecto, porfavor reintente",
         GRASS_TYPE: "A ocurrido un error en el tipo de pasto",
     },
-    [language_keys.LEYENDS]: {
+    [language_keys.INITIAL_BANNER]: {
         BUTTON_IB: "INGRESAR",
-        BUTTON_PAF: "SIGUIENTE",
-        CAPACITY: "LA PRODUCCIÓN DE PASTO POR METRO CUADRADO ES:",
-        GRAZING_AREA: "EL ÁREA EFECTIVA DE PASTOREO EN HECTÁREAS ES:",
     },
-    [language_keys.PLACEHOLDERS]: {
-        CAPACITY: "gr/m2",
-        GRAZING_AREA: "Área efectiva de pastoreo",
+    [language_keys.PADDOKS_AREA_FORM]: {
+        leyends: {
+            BUTTON: "SIGUIENTE",
+            FORRAGE_VARIETY: "TIPO DE PASTO",
+            CAPACITY: "LA PRODUCCIÓN DE PASTO POR METRO CUADRADO ES:",
+            GRAZING_AREA: "EL ÁREA EFECTIVA DE PASTOREO EN HECTÁREAS ES:",
+        },
+        placeholders: {
+            CAPACITY: "gr/m2",
+            GRASS_VARIETY: "Tipo de pasto",
+            GRAZING_AREA: "Área efectiva de pastoreo",
+        },
     },
 };
 

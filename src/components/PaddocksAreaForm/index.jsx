@@ -3,44 +3,47 @@ import { View, StyleSheet, ImageBackground } from "react-native";
 import Inputs from "../Fragments/Inputs";
 import Buttons from "../Fragments/Buttons";
 import DropDownList from "../Fragments/DropDownList";
+import {
+	Image,
+	SvgCss,
+	SvgCssUri,
+	SvgFromXml,
+	SvgUri,
+	SvgXml,
+} from "react-native-svg";
 
 export default function PaddoksAreaForm({
-	error = {},
-	navidation,
-	section = [],
-	language = {},
-	grassTypes = {},
-	operations = {},
-	decorations = {},
+	navigation_,
+	context: {
+		error = {},
+		values = {},
+		section = [],
+		languages = {},
+		grassTypes = {},
+		operations = {},
+		decorations = {},
+	},
 }) {
-	const { placeholders, leyends } = language;
-	const { area, grass, cow, background } = decorations;
+	const { capacity = 1, grazingArea = 0.1, forrageVR = "" } = values;
+	const { COW, AREA, GRASS, BACKGROUND } = decorations;
+	const { leyends = {}, placeholders = {} } = languages;
 	const { CAPACITY, GRAZING_AREA, FORRAGE_VARIETY_AND_RESTANT } = operations;
 
-	function forrageFunc(rest, name) {
-		if (rest > 1 && name != "") {
-			setFV_(rest);
-			setFR_(name);
-			setSecThree(true);
-		} else {
-			setSecThree(false);
-			setSecFour(false);
-			setER2(true);
-		}
-	}
 	return (
 		<ImageBackground
 			resizeMode="cover"
-			source={background}
+			source={BACKGROUND}
 			style={st.container}>
-			{/*DECORATION SECTION_______________________________________ */}
-			<View style={st.c_ico}>{cow}</View>
-			<View style={st.a_ico}>{area}</View>
-			<View style={st.g_ico}>{grass}</View>
-			{/*ERROR SECTION____________________________________________ */}
 			{error}
-			{/*FIRST SECTION____________________________________________ */}
+
+			{/*<Image style={st.e} source={COW} />
+			<SvgXml xml={Cow} width={150} height={150} />
+
+			<View style={st.a_ico}><SvgCss xml={area} /></View>
+			<View style={st.g_ico}><SvgCss xml={grass} /></View> */}
+
 			<Inputs
+				value={grazingArea}
 				inputMode="numeric"
 				keyboardType="numeric"
 				leyend={leyends.GRAZING_AREA}
@@ -50,21 +53,23 @@ export default function PaddoksAreaForm({
 				}
 			/>
 			<View style={st.line} />
-			{/*SECOND SECTION____________________________________________ */}
+
 			{section[0] && (
 				<>
 					<DropDownList
+						value={forrageVR}
 						items={grassTypes}
-						getItem={FORRAGE_VARIETY_AND_RESTANT}
-						placeholder={leyends.GRASS_VARIETY_AND_RESTANT}
+						leyend={leyends.FORRAGE_VARIETY}
+						dispatch={FORRAGE_VARIETY_AND_RESTANT}
 					/>
 					<View style={st.line} />
 				</>
 			)}
-			{/*THIRD SECTION____________________________________________ */}
+
 			{section[1] && (
 				<>
 					<Inputs
+						value={capacity}
 						inputMode="numeric"
 						keyboardType="numeric"
 						leyend={leyends.CAPACITY}
@@ -74,39 +79,39 @@ export default function PaddoksAreaForm({
 					<View style={st.line} />
 				</>
 			)}
-			{/*FOURTH SECTION____________________________________________ */}
+
 			{section[2] && (
 				<Buttons
-					leyend={leyends.BUTTON_PAF}
-					press={() => navidation.navigate("second")}
+					leyend={leyends.BUTTON}
+					press={() => navigation_.navigate("bovineCaracteristics")}
 				/>
 			)}
 		</ImageBackground>
 	);
 }
+
 const st = StyleSheet.create({
 	container: {
-		position: "relative",
-
 		flex: 1,
 		alignItems: "center",
 		justifyContent: "center",
 
-		backgroundColor: "#fff",
+		backgroundColor: "rgb(0,0,0)",
 	},
 	line: {
+		width: 400,
 		height: 50,
 		borderBottomWidth: 2,
-		borderBottomColor: "#000",
+		borderBottomColor: "rgb(0,0,0)",
 	},
 	c_ico: {
-		position: "relative",
+		position: "absolute",
 
 		width: 175,
 		height: 175,
 
-		top: -375,
-		right: -100,
+		top: 0,
+		right: 0,
 	},
 	a_ico: {
 		position: "relative",

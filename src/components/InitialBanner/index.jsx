@@ -3,9 +3,8 @@ import { StyleSheet, ImageBackground, Image } from "react-native";
 import Buttons from "../Fragments/Buttons";
 
 export default function InitialBanner({
-	navidation,
-	logos = {},
-	language = "",
+	navigation_,
+	context: { logos = {}, language = "" },
 }) {
 	const { GIZU, EBATE, CREING, BACKGROUND } = logos;
 	return (
@@ -18,7 +17,7 @@ export default function InitialBanner({
 			<Image style={st.c} source={CREING} />
 			<Buttons
 				leyend={language}
-				press={() => navidation.navigate("paddocksAreaForm")}
+				press={() => navigation_.navigate("paddocksAreaForm")}
 			/>
 		</ImageBackground>
 	);

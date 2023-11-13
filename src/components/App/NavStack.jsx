@@ -20,8 +20,8 @@ export default function NavStack() {
 				options={{ title: "Initial banner", headerShown: false }}>
 				{(event) => (
 					<InitialBanner
-						navidationIndex={event.navigation}
-						props={...initialBanner}
+						navigation_={event.navigation}
+						context={initialBanner}
 					/>
 				)}
 			</Stack.Screen>
@@ -31,16 +31,18 @@ export default function NavStack() {
 				options={{ title: "Paddocks area form", headerShown: false }}>
 				{(event) => (
 					<PaddoksAreaForm
-						navidationIndex={event.navigation}
-						props={...paddocksAreaForm}
+						navigation_={event.navigation}
+						context={paddocksAreaForm}
 					/>
 				)}
 			</Stack.Screen>
 
-			{/* <Stack.Screen name="second" options={{ title: "", headerShown: false }}>
-				{(e) => (
+			<Stack.Screen
+				name="bovineCaracteristics"
+				options={{ title: "Bovine_caracteristics", headerShown: false }}>
+				{(event) => (
 					<WeightProm
-						nav={e.navigation}
+						navigation_={event.navigation}
 						weigth_={setWeight_}
 						forrageConsum_={setFC_}
 						occupationPeriot_={setOP_}
@@ -48,7 +50,7 @@ export default function NavStack() {
 				)}
 			</Stack.Screen>
 
-			<Stack.Screen name="report" options={{ title: "", headerShown: false }}>
+			{/* <Stack.Screen name="report" options={{ title: "", headerShown: false }}>
 				{(e) => <GenProvider><Report2 /></GenProvider>
 			</Stack.Screen> */}
 		</Stack.Navigator>

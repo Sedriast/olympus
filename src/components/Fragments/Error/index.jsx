@@ -1,19 +1,19 @@
-import { Alert, Modal, Pressable, View, Text, StyleSheet } from "react-native";
+import { Modal, Pressable, View, Text, StyleSheet } from "react-native";
 
-export default function Error({ leyend = "" }) {
+export default function Error({ leyend = "", close = () => {} }) {
 	return (
 		<Modal
 			visible={true}
 			transparent={true}
-			animationType="slide"
-			onRequestClose={Alert.alert("closed")}>
+			statusBarTranslucent={true}
+			animationType="fade">
 			<View style={st.content}>
-				<Text style={st.l}>{leyend}</Text>
-				<Pressable
-					style={[st.button, st.buttonClose]}
-					onPress={Alert.alert("closed")}>
-					<Text style={styles.textStyle}>❌</Text>
-				</Pressable>
+				<View style={st.view}>
+					<Pressable style={st.button} onPress={close}>
+						<Text>❌</Text>
+					</Pressable>
+					<Text style={st.l}>{leyend}</Text>
+				</View>
 			</View>
 		</Modal>
 	);
@@ -21,23 +21,39 @@ export default function Error({ leyend = "" }) {
 
 const st = StyleSheet.create({
 	content: {
-		margin: 20,
-		padding: 35,
-		marginTop: 40,
+		width: "100%",
+		height: "100%",
+		backgroundColor: "rgba(0,0,0,0.5)",
+	},
+	view: {
+		position: "absolute",
+		bottom: 0,
 
-		borderRadius: 20,
-		backgroundColor: "white",
+		width: "90%",
+		height: "20%",
+
+		marginLeft: "5%",
+
+		borderTopLeftRadius: 20,
+		borderTopRightRadius: 20,
+		backgroundColor: "rgb(255,150,150)",
 
 		flex: 1,
 		justifyContent: "center",
 		alignItems: "center",
 	},
 	button: {
+		position: "absolute",
+
+		top: 10,
+		right: 10,
 		borderRadius: 20,
 		padding: 10,
-		elevation: 2,
+
+		backgroundColor: "red",
 	},
-	buttonClose: {
-		backgroundColor: "#2196F3",
+	l: {
+		fontSize: 20,
+		fontWeight: "bold",
 	},
 });
