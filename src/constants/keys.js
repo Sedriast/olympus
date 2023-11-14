@@ -1,13 +1,14 @@
 const language_keys = {
-    REPORT: "report_lang",
-
+    STATICS: "statics_lang",
     INITIAL_BANNER: "initial_banner_lang",
+    REPORT_ECUATIONS: "report_ecuations_lang",
     PADDOKS_AREA_FORM: "paddoks_area_form_lang",
     BOVINE_CARACTERISTICS: "bovine_caracteristics_lang",
 };
 
 const reducer_keys = {
     CAPACITY: "capacity",
+    RESET_ALL: "reset_all",
     ERROR_OFF: "errors_lang",
     GRAZING_AREA: "grazing_area",
     ANIMAL_WEIGHT: "animal_weight",

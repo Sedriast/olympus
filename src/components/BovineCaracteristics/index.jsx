@@ -14,12 +14,16 @@ export default function BovineCaracteristics({
 		languages = {},
 		operations = {},
 		decorations = {},
-		grassFreshness = [],
+		grassFreshness_ = [],
 	},
 }) {
 	const { COW, CART, BALANCE } = decorations;
 	const { leyends = {}, placeholders = {} } = languages;
-	const { forrageConsume, animalWeight, ocupationPeriode } = values;
+	const {
+		animalWeight = 0,
+		grassFreshness = "",
+		ocupationPeriode = 0,
+	} = values;
 	const { END, FORRAGE_CONSUME, ANIMAL_WEIGHT, OCUPATION_PERIODE } = operations;
 
 	return (
@@ -64,10 +68,10 @@ export default function BovineCaracteristics({
 			{section[1] && (
 				<>
 					<DropDownList
-						value={forrageConsume}
-						items={grassFreshness}
+						value={grassFreshness}
+						items={grassFreshness_}
 						dispatch={FORRAGE_CONSUME}
-						leyend={leyends.FORRAGE_CONSUME}
+						leyend={leyends.GRASS_FRESHNESS}
 					/>
 					<View style={st.line} />
 				</>
@@ -110,9 +114,12 @@ const st = StyleSheet.create({
 		borderBottomColor: "rgb(0,0,0)",
 	},
 	btns: {
+		width: "80%",
+		marginTop: 20,
+
 		display: "flex",
 		flexDirection: "row",
-		justifyContent: "space-between",
+		justifyContent: "space-around",
 	},
 	b_ico: {
 		width: 200,

@@ -1,23 +1,36 @@
 import { language_keys } from "./keys";
 
 const es = {
+    [language_keys.STATICS]: {
+        GRASS_TYPES: {
+            KIKUYO: "Kikuyo",
+            RYEGRASS: "Ryegrass",
+            RED_CARRETON: "Carreton rojo",
+            WHITE_CARRETON: "Carreton blanco",
+        },
+        GRASS_FRESHNESS: {
+            OLD: "Viejo",
+            FRESH: "Tierno",
+            MEDIUM: "Medio",
+        },
+    },
     [language_keys.ERRORS]: {
-        GRAZING_AREA: "El área es incorrecta,reintente",
-        CAPACITY: "Aforo incorrecto, porfavor reintente",
-        GRASS_TYPE: "A ocurrido un error en el tipo de pasto",
-        OCUPATION_PERIODE: "El periodo de ocupación no puede ser inferior a 1 dia",
+        GRAZING_AREA: "El área es incorrecta, reintente",
+        CAPACITY: "Aforo incorrecto, por favor reintente",
+        GRASS_TYPE: "Ha ocurrido un error en el tipo de pasto",
+        OCUPATION_PERIODE: "El periodo de ocupación no puede ser inferior a 1 día",
         ANIMAL_WEIGHT: "El peso de los ejemplares no puede ser inferior a 10 kilos",
         FORRAGE_CONSUME: "El consumo de forraje no puede ser inferior a 1 kilogramo",
     },
     [language_keys.INITIAL_BANNER]: {
-        BUTTON_IB: "INGRESAR",
+        BUTTON_IB: "Ingresar",
     },
     [language_keys.PADDOKS_AREA_FORM]: {
         leyends: {
-            BUTTON: "SIGUIENTE",
-            FORRAGE_VARIETY: "TIPO DE PASTO",
-            CAPACITY: "LA PRODUCCIÓN DE PASTO POR METRO CUADRADO ES:",
-            GRAZING_AREA: "EL ÁREA EFECTIVA DE PASTOREO EN HECTÁREAS ES:",
+            BUTTON: "Siguiente",
+            FORRAGE_VARIETY: "Tipo de pasto",
+            CAPACITY: "La producción de pasto por metro cuadrado es:",
+            GRAZING_AREA: "El área efectiva de pastoreo en hectáreas es:",
         },
         placeholders: {
             CAPACITY: "gr/m2",
@@ -28,32 +41,32 @@ const es = {
     [language_keys.BOVINE_CARACTERISTICS]: {
         leyends: {
             EMPTY: " ",
-            BUTTON_1: "ATRÁS",
-            BUTTON_2: "SIGUIENTE",
+            BUTTON_1: "Atrás",
+            BUTTON_2: "Siguiente",
             PERIODE_: "Periodo de ocupación",
-            FORRAGE_CONSUME: "Consumo de forraje",
-            OCUPATION_PERIODE: "EL PERIODO DE OCUPACIÓN EN DIAS ES:",
-            ANIMAL_WEIGHT: "EL PESO PROMEDIO DE LOS EJEMPLARES, EN KG, ES:",
+            GRASS_FRESHNESS: "Frescura del pasto",
+            OCUPATION_PERIODE: "El periodo de ocupación en días es:",
+            ANIMAL_WEIGHT: "El peso promedio de los ejemplares, en kg, es:",
         },
         placeholders: {
             ANIMAL_WEIGHT: "Peso en kilogramos",
-            OCUPATION_PERIODE: "Periodo en dias",
+            OCUPATION_PERIODE: "Periodo en días",
             GRASS_FRESHNESS: "Frescura del pasto",
         },
     },
-    [language_keys.REPORT]: {
+    [language_keys.REPORT_ECUATIONS]: {
         leyends: {
-            BUTTON_1: "ATRÁS",
-            BUTTON_2: "CAPTURAR",
-            NUMBER_OF_PADDOKS: "m²",
+            BUTTON_1: "Atrás",
+            PADDOCKS_AREA: "m²",
+            BUTTON_2: "Reiniciar",
             REAL_CHARGE: "Ejemplares",
             REAL_PADDOCKS_FORRAGE: "gr/m²",
         },
         titles: {
-            PADDOCKS_AREA: "ÁREA DE POTREROS:",
-            PADDOCKS_FORRAGE: "PRODUCCIÓN DE PASTO:",
-            NUMBER_OF_PADDOKS: "ÁREA DE CADA POTRERO:",
-            REAL_CHARGE: "LOS POTREROS PUEDEN MANTENER",
+            PADDOCKS_AREA: "Área de cada potrero:",
+            PADDOCKS_FORRAGE: "Producción de pasto:",
+            NUMBER_OF_PADDOKS: "Número de potreros:",
+            REAL_CHARGE: "Los potreros pueden mantener",
         },
     },
 };

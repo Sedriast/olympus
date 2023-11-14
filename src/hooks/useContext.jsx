@@ -30,15 +30,30 @@ export default function GenProvider({ children }) {
 		grazingLost: 0.2,
 		largeLivestockUnits: 450,
 		grassType: [
-			{ name: "Kikuyo", timeToSleep: 33 },
-			{ name: "Ryegrass", timeToSleep: 33 },
-			{ name: "Red carreton", timeToSleep: 33 },
-			{ name: "White carreton", timeToSleep: 33 },
+			{ name: es[language_keys.STATICS].GRASS_TYPES.KIKUYO, timeToSleep: 33 },
+			{ name: es[language_keys.STATICS].GRASS_TYPES.RYEGRASS, timeToSleep: 33 },
+			{
+				name: es[language_keys.STATICS].GRASS_TYPES.RED_CARRETON,
+				timeToSleep: 33,
+			},
+			{
+				name: es[language_keys.STATICS].GRASS_TYPES.WHITE_CARRETON,
+				timeToSleep: 33,
+			},
 		],
 		grassFreshness_: [
-			{ name: "Medio", timeToSleep: 0.13 },
-			{ name: "Viejo", timeToSleep: 0.15 },
-			{ name: "Tierno", timeToSleep: 0.12 },
+			{
+				name: es[language_keys.STATICS].GRASS_FRESHNESS.FRESH,
+				timeToSleep: 0.12,
+			},
+			{
+				name: es[language_keys.STATICS].GRASS_FRESHNESS.MEDIUM,
+				timeToSleep: 0.13,
+			},
+			{
+				name: es[language_keys.STATICS].GRASS_FRESHNESS.OLD,
+				timeToSleep: 0.15,
+			},
 		],
 		errorOff: (error) => (
 			<Error
@@ -48,16 +63,6 @@ export default function GenProvider({ children }) {
 		),
 	};
 
-	/* 
-
-
-
-	INITIAL_BANNER°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
-
-
-
-	*/
-
 	const initialBanner = {
 		language: es[language_keys.INITIAL_BANNER].BUTTON_IB,
 		logos: {
@@ -66,16 +71,6 @@ export default function GenProvider({ children }) {
 			GIZU: PNG_?.GIZU,
 		},
 	};
-
-	/*
-
-
-
-	PADDOCKS_AREA_FORM°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
-
-
-
-	*/
 
 	const paddocksAreaForm = {
 		error: state.error,
@@ -121,8 +116,11 @@ export default function GenProvider({ children }) {
 					  });
 			},
 			CAPACITY: (capacity_ = 0) =>
-				capacity_ > 0
-					? dispatch({ type: reducer_keys.CAPACITY, payload: [capacity_] })
+				parseFloat(capacity_) > 0
+					? dispatch({
+							type: reducer_keys.CAPACITY,
+							payload: [parseFloat(capacity_)],
+					  })
 					: dispatch({
 							type: reducer_keys.ERROR_CAPACITY,
 							payload: [statics.errorOff(es[language_keys.ERRORS].CAPACITY)],
@@ -131,25 +129,15 @@ export default function GenProvider({ children }) {
 		},
 	};
 
-	/*
-
-
-
-	BOVINE_CARACTERISTICS°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
-
-
-
-	*/
-	console.log(state.sectionsSubProvider);
 	const bovineCaracteristics = {
 		error: state.error,
 		section: state.sectionsSubProvider,
-		grassFreshness: statics.grassFreshness_,
+		grassFreshness_: statics.grassFreshness_,
 		languages: es[language_keys.BOVINE_CARACTERISTICS],
 		values: {
 			animalWeight: state.animalWeight,
 			forrageConsum: state.forrageConsum,
-			ocupationPeriode: state.occupationPeriode,
+			grassFreshness: state.grassFreshness,
 		},
 		operations: {
 			ANIMAL_WEIGHT: (animalWeight_ = 0) => {
@@ -182,7 +170,7 @@ export default function GenProvider({ children }) {
 				forrageConsume_ > 0
 					? dispatch({
 							type: reducer_keys.FORRAGE_CONSUME,
-							payload: [grassFreshness_, forrageConsume_],
+							payload: [forrageConsume_, grassFreshness_],
 					  })
 					: dispatch({
 							type: reducer_keys.ERROR_FORRAGE_CONSUME,
@@ -194,36 +182,37 @@ export default function GenProvider({ children }) {
 		},
 	};
 
-	/*
-
-
-
-	REPORT_ECUATIONS°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
-
-
-
-	*/
-
 	const reportEcuations = () => {
-		let paddockForrage = (paddocksArea * state.capacity) / 1000;
 		let numberOfPaddocks = state.forrageRestant / state.occupationPeriode + 1;
-		let realPaddockForrage =
-			paddockForrage - paddockForrage * statics.grazingLost;
-		let realCharge =
-			(animalCharge * state.animalWeight) / statics.largeLivestockUnits;
 		let paddocksArea =
 			(state.grazingArea * 10000) / parseFloat(numberOfPaddocks).toFixed();
+		let paddockForrage = (paddocksArea * state.capacity) / 1000;
+		let realPaddockForrage =
+			paddockForrage - paddockForrage * statics.grazingLost;
 		let animalCharge =
 			realPaddockForrage /
 			(state.occupationPeriode * (state.animalWeight * state.forrageConsum));
-
+		let realCharge =
+			(animalCharge * state.animalWeight) / statics.largeLivestockUnits;
 		return {
-			realCharge: realCharge,
-			animalCharge: animalCharge,
-			paddocksArea: paddocksArea,
-			paddockForrage: paddockForrage,
-			numberOfPaddocks: numberOfPaddocks,
-			realPaddockForrage: realPaddockForrage,
+			languages: es[language_keys.REPORT_ECUATIONS],
+			values: {
+				END: () =>
+					dispatch({
+						type: reducer_keys.RESET_ALL,
+						payload: [
+							es[language_keys.PADDOKS_AREA_FORM].placeholders.GRASS_VARIETY,
+							es[language_keys.BOVINE_CARACTERISTICS].placeholders
+								.GRASS_FRESHNESS,
+						],
+					}),
+				realCharge: realCharge.toFixed(),
+				animalCharge: animalCharge.toFixed(),
+				paddocksArea: paddocksArea.toFixed(),
+				paddockForrage: paddockForrage.toFixed(),
+				numberOfPaddocks: numberOfPaddocks.toFixed(),
+				realPaddockForrage: realPaddockForrage.toFixed(),
+			},
 		};
 	};
 

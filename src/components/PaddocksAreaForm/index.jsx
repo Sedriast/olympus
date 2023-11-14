@@ -76,7 +76,7 @@ export default function PaddoksAreaForm({
 						keyboardType="numeric"
 						leyend={leyends.CAPACITY}
 						placeholder={placeholders.CAPACITY}
-						onChangeText={(event) => CAPACITY(parseFloat(event).toFixed())}
+						onChangeText={(event) => CAPACITY(event)}
 					/>
 					<View style={st.line} />
 				</>

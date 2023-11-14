@@ -11,8 +11,13 @@ import BovineCaracteristics from "../BovineCaracteristics";
 const Stack = createNativeStackNavigator();
 
 export default function NavStack() {
-	const { initialBanner, paddocksAreaForm, bovineCaracteristics, background } =
-		React.useContext(GeneralContext);
+	const {
+		background,
+		initialBanner,
+		reportEcuations,
+		paddocksAreaForm,
+		bovineCaracteristics,
+	} = React.useContext(GeneralContext);
 	return (
 		<Stack.Navigator>
 			<Stack.Screen
@@ -55,8 +60,8 @@ export default function NavStack() {
 				{(event) => (
 					<Report
 						background={background}
+						context={reportEcuations()}
 						navigation_={event.navigation}
-						context={report}
 					/>
 				)}
 			</Stack.Screen>

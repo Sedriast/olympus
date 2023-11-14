@@ -1,6 +1,18 @@
 import { reducer_keys } from "../constants/keys";
 
 const object_reducer = (state = {}, payload = []) => ({
+    [reducer_keys.RESET_ALL]: {
+        capacity: 1,
+        error: <></>,
+        animalWeight: 1,
+        forrageConsum: 1,
+        grazingArea: 0.1,
+        forrageRestant: 1,
+        occupationPeriode: 1,
+        sectionsSubProvider: [false, false, false],
+        forrageVariety: payload[0],
+        grassFreshness: payload[1],
+    },
     [reducer_keys.ERROR_OFF]: {
         ...state,
         error: <></>,
@@ -56,7 +68,7 @@ const object_reducer = (state = {}, payload = []) => ({
     },
     [reducer_keys.OCUPATION_PERIOD]: {
         ...state,
-        ocupationPeriod: payload[0],
+        occupationPeriode: payload[0],
         sectionsSubProvider: [true, true, false],
     },
     [reducer_keys.ERROR_OCUPATION_PERIOD]: {
@@ -67,7 +79,7 @@ const object_reducer = (state = {}, payload = []) => ({
     },
     [reducer_keys.FORRAGE_CONSUME]: {
         ...state,
-        forrageConsume: payload[0],
+        forrageConsum: payload[0],
         grassFreshness: payload[1],
         sectionsSubProvider: [true, true, true],
     },
