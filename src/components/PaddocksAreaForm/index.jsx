@@ -1,16 +1,8 @@
-import { View, StyleSheet, ImageBackground } from "react-native";
+import { View, StyleSheet, ImageBackground, Image } from "react-native";
 
 import Inputs from "../Fragments/Inputs";
 import Buttons from "../Fragments/Buttons";
 import DropDownList from "../Fragments/DropDownList";
-// import {
-// 	Image,
-// 	SvgCss,
-// 	SvgCssUri,
-// 	SvgFromXml,
-// 	SvgUri,
-// 	SvgXml,
-// } from "react-native-svg";
 
 export default function PaddoksAreaForm({
 	background,
@@ -25,8 +17,8 @@ export default function PaddoksAreaForm({
 		decorations = {},
 	},
 }) {
-	const { COW_HEAD, AREA, GRASS } = decorations;
 	const { leyends = {}, placeholders = {} } = languages;
+	const { COW_HEAD = "", AREA = "", GRASS = "" } = decorations;
 	const { capacity = 1, grazingArea = 0.1, forrageVR = "" } = values;
 	const { END, CAPACITY, GRAZING_AREA, FORRAGE_VARIETY_AND_RESTANT } =
 		operations;
@@ -38,12 +30,7 @@ export default function PaddoksAreaForm({
 			resizeMode="cover">
 			{error}
 
-			{/*<Image style={st.e} source={COW} />
-			<SvgXml xml={Cow} width={150} height={150} />
-
-			<View style={st.a_ico}><SvgCss xml={area} /></View>
-			<View style={st.g_ico}><SvgCss xml={grass} /></View> */}
-
+			<Image style={st.ch_ico} source={COW_HEAD} />
 			<Inputs
 				value={grazingArea}
 				inputMode="numeric"
@@ -58,6 +45,7 @@ export default function PaddoksAreaForm({
 
 			{section[0] && (
 				<>
+					<Image style={st.a_ico} source={AREA} />
 					<DropDownList
 						value={forrageVR}
 						items={grassTypes}
@@ -70,6 +58,7 @@ export default function PaddoksAreaForm({
 
 			{section[1] && (
 				<>
+					<Image style={st.g_ico} source={GRASS} />
 					<Inputs
 						value={capacity}
 						inputMode="numeric"
@@ -112,34 +101,40 @@ const st = StyleSheet.create({
 
 		borderBottomWidth: 4,
 		borderBottomColor: "rgb(0,0,0)",
+
+		zIndex: 1,
 	},
 	ch_ico: {
 		position: "absolute",
 
-		width: 175,
-		height: 175,
+		width: 150,
+		height: 150,
 
-		top: 0,
-		right: 0,
+		top: 30,
+		right: -20,
+
+		zIndex: 0,
 	},
 	a_ico: {
-		position: "relative",
+		position: "absolute",
 
-		width: 200,
-		height: 200,
+		width: 100,
+		height: 100,
 
-		left: -85,
-		top: 205,
+		left: 25,
+		top: 400,
 
 		zIndex: 0,
 	},
 	g_ico: {
-		position: "relative",
+		position: "absolute",
 
 		width: 150,
 		height: 200,
 
-		bottom: -30,
+		bottom: -15,
 		right: 10,
+
+		zIndex: 0,
 	},
 });

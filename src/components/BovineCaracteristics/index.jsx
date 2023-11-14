@@ -1,4 +1,4 @@
-import { ImageBackground, StyleSheet, View } from "react-native";
+import { Image, ImageBackground, StyleSheet, View } from "react-native";
 
 import Inputs from "../Fragments/Inputs";
 import Buttons from "../Fragments/Buttons";
@@ -33,10 +33,7 @@ export default function BovineCaracteristics({
 			resizeMode="cover">
 			{error}
 
-			{/* 
-			<Image style={st.bal} source={balan} /> 
-			*/}
-
+			<Image style={st.b_ico} source={BALANCE} />
 			<Inputs
 				inputMode="numeric"
 				value={animalWeight}
@@ -51,6 +48,7 @@ export default function BovineCaracteristics({
 
 			{section[0] && (
 				<>
+					<Image style={st.c_ico} source={COW} />
 					<Inputs
 						inputMode="numeric"
 						keyboardType="numeric"
@@ -67,6 +65,7 @@ export default function BovineCaracteristics({
 
 			{section[1] && (
 				<>
+					<Image style={st.ca_ico} source={CART} />
 					<DropDownList
 						value={grassFreshness}
 						items={grassFreshness_}
@@ -112,6 +111,8 @@ const st = StyleSheet.create({
 
 		borderBottomWidth: 4,
 		borderBottomColor: "rgb(0,0,0)",
+
+		zIndex: 1,
 	},
 	btns: {
 		width: "80%",
@@ -120,34 +121,40 @@ const st = StyleSheet.create({
 		display: "flex",
 		flexDirection: "row",
 		justifyContent: "space-around",
+
+		zIndex: 1,
 	},
 	b_ico: {
-		width: 200,
-		height: 200,
+		width: 100,
+		height: 100,
 
 		position: "absolute",
 
-		right: -80,
-		top: 150,
+		right: 20,
+		top: 50,
 
 		zIndex: 0,
 	},
 	c_ico: {
 		position: "absolute",
 
-		width: 200,
-		height: 200,
+		width: 225,
+		height: 150,
 
-		bottom: -35,
+		bottom: 0,
 		left: 10,
+
+		zIndex: 0,
 	},
-	ca_icoo: {
+	ca_ico: {
 		position: "absolute",
 
-		width: 175,
-		height: 175,
+		width: 200,
+		height: 125,
 
-		bottom: -15,
+		bottom: -2.5,
 		right: -20,
+
+		zIndex: 0,
 	},
 });

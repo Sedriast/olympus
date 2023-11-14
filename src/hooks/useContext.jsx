@@ -8,7 +8,6 @@ import Error from "../components/Fragments/Error";
 import { Img_ } from "../constants/Img_";
 
 export const GeneralContext = React.createContext();
-const { PNG_, SVG_ } = Img_;
 
 export default function GenProvider({ children }) {
 	const [state, dispatch] = React.useReducer(reducer, {
@@ -66,9 +65,9 @@ export default function GenProvider({ children }) {
 	const initialBanner = {
 		language: es[language_keys.INITIAL_BANNER].BUTTON_IB,
 		logos: {
-			CREING: PNG_?.CREING,
-			EBATE: PNG_?.EBATE,
-			GIZU: PNG_?.GIZU,
+			CREING: Img_.CREING,
+			EBATE: Img_.EBATE,
+			GIZU: Img_.GIZU,
 		},
 	};
 
@@ -83,9 +82,9 @@ export default function GenProvider({ children }) {
 			forrageVR: state.forrageVariety,
 		},
 		decorations: {
-			AREA: SVG_.AREA,
-			GRASS: SVG_.GRASS,
-			COW_HEAD: SVG_.COWHEAD,
+			AREA: Img_.AREA,
+			GRASS: Img_.GRASS,
+			COW_HEAD: Img_.COWHEAD,
 		},
 		operations: {
 			GRAZING_AREA: (grazingArea_ = 0) => {
@@ -138,6 +137,11 @@ export default function GenProvider({ children }) {
 			animalWeight: state.animalWeight,
 			forrageConsum: state.forrageConsum,
 			grassFreshness: state.grassFreshness,
+		},
+		decorations: {
+			COW: Img_.COW,
+			CART: Img_.CART,
+			BALANCE: Img_.BALANCE,
 		},
 		operations: {
 			ANIMAL_WEIGHT: (animalWeight_ = 0) => {
@@ -223,7 +227,7 @@ export default function GenProvider({ children }) {
 				reportEcuations,
 				paddocksAreaForm,
 				bovineCaracteristics,
-				background: PNG_.BACKGROUND,
+				background: Img_.BACKGROUND,
 			}}>
 			{children}
 		</GeneralContext.Provider>
