@@ -58,7 +58,6 @@ This application involves a series of agro-environmental knowledge dedicated to 
 > 
 > will be requested.
 > 
-> .
 
 </h3>
   
