@@ -2,7 +2,7 @@
   "expo": {
     "name": "olympus",
     "slug": "olympus",
-    "version": "3.1.8",
+    "version": "5.3.1",
     "orientation": "portrait",
     "icon": "./src/constants/assets/icon.png",
     "userInterfaceStyle": "dark",
@@ -10,10 +10,6 @@
       "image": "./src/constants/assets/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#00512C"
-    },
-    "updates": {
-      "fallbackToCacheTimeout": 0,
-      "url": "https://u.expo.dev/827620ff-517b-45d1-9f83-917a396b8adc"
     },
     "assetBundlePatterns": [
       "**/*"
@@ -23,21 +19,12 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./src/constants/assets/adaptive_icon.png",
+        "foregroundImage": "./src/constants/assets/adaptive-icon.png",
         "backgroundColor": "#00512C"
-      },
-      "package": "com.sedriast.olympus"
+      }
     },
     "web": {
       "favicon": "./src/constants/assets/favicon.png"
-    },
-    "extra": {
-      "eas": {
-        "projectId": "827620ff-517b-45d1-9f83-917a396b8adc"
-      }
-    },
-    "runtimeVersion": {
-      "policy": "sdkVersion"
     }
   }
 }
