@@ -1,13 +1,13 @@
 <h1 align="center">Olympus</h1>
 
 <h2 align="left">
-
+Implementation of Mathematical and Technological Foundations for Livestock Management focused on Transmodern and Translocal Transformation in the Province of Ubaté.
 </h2>
 <h3 align="left">
-
+This application involves a series of agro-environmental knowledge dedicated to the care and feeding of bovine specimens, through space management, land use, and data administration of the specimens
 </h3>
 
-<img alt="Decoration" src="" width="100%" align="center">
+<img alt="Decoration" src="https://firebasestorage.googleapis.com/v0/b/port-e39af.appspot.com/o/Decorations%2Ftopborder_1711112.svg?alt=media&token=d781ab2f-987b-4aa0-ba80-6087a54a9eb5" width="100%" align="center">
 <table align="center">
     <td>Waterfall Methodology</td>
 </table>
