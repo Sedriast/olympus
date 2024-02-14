@@ -32,7 +32,7 @@ export default function PaddoksAreaForm({
 
 			<Image style={st.ch_ico} source={COW_HEAD} />
 			<Inputs
-				value={grazingArea}
+				value={grazingArea.toString()}
 				inputMode="numeric"
 				keyboardType="numeric"
 				leyend={leyends.GRAZING_AREA}
