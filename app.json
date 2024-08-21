@@ -19,7 +19,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./constants/assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.sedriast.olympus"
     },
     "web": {
       "bundler": "metro",
@@ -31,6 +32,14 @@
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "ac5e3176-f1e1-4d66-bda7-70992754fa8f"
+      }
     }
   }
 }
