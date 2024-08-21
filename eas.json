@@ -3,26 +3,17 @@
     "version": ">= 7.2.0"
   },
   "build": {
-    "development": {
-      "developmentClient": true,
-      "android":{
-        "buildType": "apk"
-      }
-    },
+    
     "preview": {
-      "android":{
+      "android": {
         "buildType": "apk"
       }
     },
-    "preview2": {
+    "production": {
       "android": {
-        "gradleCommand": ":app:assembleRelease"
+        "buildType": "apk"
       }
-    },
-    "preview3": {
-      "developmentClient": true
-    },
-    "production": {}
+    }
   },
   "submit": {
     "production": {}
