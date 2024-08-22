@@ -1,50 +1,101 @@
-# Welcome to your Expo app 👋
+<h1 align="center">Olympus</h1>
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+<table align="center">
+        <tr>
+            <td>
+               <img alt="" src="https://firebasestorage.googleapis.com/v0/b/port-e39af.appspot.com/o/Pictures%2FOLYMPUS%2Fadaptive_icon.png?alt=media&token=c4c7945a-0c30-4c07-81b5-1d6965ff1f66" width="200" align="">
+            </td>
+        </tr>
+</table>
 
-## Get started
+<h2 align="left">
+Implementation of Mathematical and Technological Foundations for Livestock Management focused on Transmodern and Translocal Transformation in the Province of Ubaté.
+</h2>
 
-1. Install dependencies
+<h3>
+This application involves a series of agro-environmental knowledge dedicated to the care and feeding of bovine specimens, through space management, land use, and data administration of the specimens
+</h3>
 
-   ```bash
-   npm install
-   ```
+<img alt="Decoration" src="https://firebasestorage.googleapis.com/v0/b/port-e39af.appspot.com/o/Decorations%2Ftopborder_1711112.svg?alt=media&token=d781ab2f-987b-4aa0-ba80-6087a54a9eb5" width="100%" align="center">
+<table align="center">
+    <td>Waterfall Methodology</td>
+</table>
 
-2. Start the app
+<table align="center">
+        <tr>
+            <td>
+                <img alt="Icon_React_Native" src="https://firebasestorage.googleapis.com/v0/b/port-e39af.appspot.com/o/ProgramLanguageIcons%2Freact_0811235.svg?alt=media&token=13080b02-e479-4a70-9e47-6a85355c4418" width="80"/>
+                <h6>React Native</h6>
+            </td>
+        </tr>
+</table>
 
-   ```bash
-    npx expo start
-   ```
+<h1></h1>
 
-In the output, you'll find options to open the app in a
+<table width="400" align="right">
+    <tr>
+        <td>
+            <img alt="" src="https://firebasestorage.googleapis.com/v0/b/port-e39af.appspot.com/o/Pictures%2FOLYMPUS%2F1707942660903.jpg?alt=media&token=349d52e4-31a1-4ffb-b199-d050d108a611" height="300">
+        </td>
+        <td>
+            <img alt="" src="https://firebasestorage.googleapis.com/v0/b/port-e39af.appspot.com/o/Pictures%2FOLYMPUS%2F1707942660895.jpg?alt=media&token=096cdfc2-9af7-49b0-953a-c3c764e4d147" height="300">
+        </td>
+    </tr>
+</table>
+<h3 align="left">
+  
+> As the first part of the process, the
+> 
+> logos of the research group “ebate” and
+> 
+> the seedbeds “creing” and “gizu” are
+> 
+> presented. Subsequently, the effective
+> 
+> grazing area, the type of grass, and the
+> 
+> production per square meter of that grass
+> 
+> will be requested.
+>
+> 
+> 
+> 
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+</h3>
+  
+<table width="400" align="left">
+    <tr>
+        <td>
+            <img alt="" src="https://firebasestorage.googleapis.com/v0/b/port-e39af.appspot.com/o/Pictures%2FOLYMPUS%2F1707942660890.jpg?alt=media&token=4d82f7c2-8b05-4c5b-af3e-3eed051127cf" height="300">
+        </td>
+        <td>
+            <img alt="" src="https://firebasestorage.googleapis.com/v0/b/port-e39af.appspot.com/o/Pictures%2FOLYMPUS%2F1707942660881.jpg?alt=media&token=c0215368-5f09-463e-bc62-6cdf8966587b" height="300">
+        </td>
+    </tr>
+</table>
+<h3>
+ 
+> Next, the average weight of the bovine
+> 
+> specimens, the period during which the
+> 
+> paddocks will be used, and the freshness
+> 
+> of the grass are requested. Finally, the
+> 
+> respective equations yield the number of
+> 
+> paddocks, their area, the amount of grass
+> 
+> they produce, and the number of specimens
+> 
+> that can be kept in each paddock12.
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+</h3>
 
-## Get a fresh project
+<h1 align="center"></h1>
 
-When you're ready, run:
-
-```bash
-npm run reset-project
-```
-
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+<h1 align="center">
+    
+</h1>
