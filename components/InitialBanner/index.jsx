@@ -1,4 +1,4 @@
-import { StyleSheet, Image, ImageBackground } from "react-native";
+import { StyleSheet, Image, ImageBackground, StatusBar } from "react-native";
 
 import Buttons from "../Fragments/Buttons";
 
@@ -12,7 +12,8 @@ export default function InitialBanner({
 		<ImageBackground
 			style={st.container}
 			source={background}
-			resizeMode="cover">
+			resizeMode="cover"
+			backgroundColor="#025529">
 			<Image style={st.g} source={GIZU} />
 			<Image style={st.e} source={EBATE} />
 			<Image style={st.c} source={CREING} />
@@ -30,7 +31,7 @@ const st = StyleSheet.create({
 		alignItems: "center",
 		justifyContent: "center",
 
-		backgroundColor: "rgb(0,0,0)",
+		backgroundColor: "#025529",
 	},
 	e: {
 		width: 150,

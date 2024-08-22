@@ -1,4 +1,10 @@
-import { View, StyleSheet, ImageBackground, Image } from "react-native";
+import {
+	View,
+	Image,
+	StatusBar,
+	StyleSheet,
+	ImageBackground,
+} from "react-native";
 
 import Inputs from "../Fragments/Inputs";
 import Buttons from "../Fragments/Buttons";
@@ -17,9 +23,9 @@ export default function PaddoksAreaForm({
 		decorations = {},
 	},
 }) {
-	const { leyends = {}, placeholders = {} } = languages;
-	const { COW_HEAD = "", AREA = "", GRASS = "" } = decorations;
-	const { capacity = 1, grazingArea = 0.1, forrageVR = "" } = values;
+	const { leyends, placeholders } = languages;
+	const { COW_HEAD, AREA, GRASS } = decorations;
+	const { capacity, grazingArea, forrageVR } = values;
 	const { END, CAPACITY, GRAZING_AREA, FORRAGE_VARIETY_AND_RESTANT } =
 		operations;
 
@@ -27,19 +33,17 @@ export default function PaddoksAreaForm({
 		<ImageBackground
 			style={st.container}
 			source={background}
-			resizeMode="cover">
+			resizeMode="cover"
+			backgroundColor="#025529">
 			{error}
 
 			<Image style={st.ch_ico} source={COW_HEAD} />
 			<Inputs
-				value={grazingArea.toString()}
 				inputMode="numeric"
-				keyboardType="numeric"
 				leyend={leyends.GRAZING_AREA}
+				value={grazingArea.toString()}
 				placeholder={placeholders.GRAZING_AREA}
-				onEndEditing={(event) =>
-					GRAZING_AREA(parseFloat(event.nativeEvent.text))
-				}
+				onChange={(event) => GRAZING_AREA(parseFloat(event.nativeEvent.text))}
 			/>
 			<View style={st.line} />
 
@@ -89,8 +93,7 @@ const st = StyleSheet.create({
 		flex: 1,
 		alignItems: "center",
 		justifyContent: "center",
-
-		backgroundColor: "rgb(0,0,0)",
+		backgroundColor: "#025529",
 	},
 	line: {
 		width: 300,

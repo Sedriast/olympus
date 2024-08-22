@@ -87,19 +87,16 @@ export function GenProvider({ children }) {
 			COW_HEAD: Img_.COWHEAD,
 		},
 		operations: {
-			GRAZING_AREA: (grazingArea_ = 0) => {
-				grazingArea_ > 0
+			GRAZING_AREA: (grazingArea_) =>
+				grazingArea_ > 0.01
 					? dispatch({
 							type: reducer_keys.GRAZING_AREA,
-							payload: [grazingArea_],
+							payload: grazingArea_,
 					  })
 					: dispatch({
 							type: reducer_keys.ERROR_GRAZING_AREA,
-							payload: [
-								statics.errorOff(es[language_keys.ERRORS].GRAZING_AREA),
-							],
-					  });
-			},
+							payload: statics.errorOff(es[language_keys.ERRORS].GRAZING_AREA),
+					  }),
 			FORRAGE_VARIETY_AND_RESTANT: (
 				forrageVariety_ = "",
 				forrageRestant_ = 0

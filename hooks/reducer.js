@@ -23,13 +23,13 @@ const object_reducer = (state = {}, payload = []) => ({
     },
     [reducer_keys.GRAZING_AREA]: {
         ...state,
-        grazingArea: payload[0],
+        grazingArea: payload,
         sectionsSubProvider: [true, false, false],
     },
     [reducer_keys.ERROR_GRAZING_AREA]: {
         ...state,
-        grazingArea: 1,
-        error: payload[0],
+        grazingArea: 0.11,
+        error: payload,
         sectionsSubProvider: [false, false, false],
     },
     [reducer_keys.GRASS_VARIETY_AND_RESTANT]: {

@@ -10,17 +10,27 @@
     "splash": {
       "image": "./constants/assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#025529"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "infoPlist": {
+        "UIStatusBarStyle": "UIStatusBarStyleLightContent"
+      }
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./constants/assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "backgroundColor": "#025529"
       },
-      "package": "com.sedriast.olympus"
+      "package": "com.sedriast.olympus",
+      "notification": {
+        "color": "#025529"
+      },
+      "statusBar": {
+        "backgroundColor": "#025529",
+        "barStyle": "light-content"
+      }
     },
     "web": {
       "bundler": "metro",

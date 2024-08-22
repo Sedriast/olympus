@@ -30,7 +30,8 @@ export default function BovineCaracteristics({
 		<ImageBackground
 			style={st.container}
 			source={background}
-			resizeMode="cover">
+			resizeMode="cover"
+			backgroundColor="#025529">
 			{error}
 
 			<Image style={st.b_ico} source={BALANCE} />
@@ -100,7 +101,7 @@ const st = StyleSheet.create({
 		alignItems: "center",
 		justifyContent: "center",
 
-		backgroundColor: "rgb(0,0,0)",
+		backgroundColor: "#025529",
 	},
 	line: {
 		width: 300,
