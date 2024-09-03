@@ -58,9 +58,13 @@ This application involves a series of agro-environmental knowledge dedicated to 
 > 
 > will be requested.
 >
+> .
 > 
-> 
-> 
+> .
+>
+> .
+>
+> .
 
 </h3>
   
@@ -90,7 +94,7 @@ This application involves a series of agro-environmental knowledge dedicated to 
 > 
 > they produce, and the number of specimens
 > 
-> that can be kept in each paddock12.
+> that can be kept in each paddock.
 
 </h3>
 
